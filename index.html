@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="REBL — Robotics-Enabled Biology Lab. UCL Department of Computer Science." />
+  <title>REBL — Robotics-Enabled Biology Lab · UCL Computer Science</title>
+
+  <link rel="icon" href="assets/rebl-logo.png" type="image/png" />
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+</head>
+
+<body>
+  <div class="bg" aria-hidden="true"></div>
+
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <header class="header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#home" aria-label="REBL home">
+        <img src="assets/rebl-logo.png" alt="" />
+        <div class="title">
+          <strong>Robotics-Enabled Biology Lab</strong>
+          <span>UCL · Computer Science</span>
+        </div>
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Primary navigation">
+        <a href="#research">Research</a>
+        <a href="#people">People</a>
+        <a href="#publications">Publications</a>
+        <a href="#news">News</a>
+        <a href="#join">Join</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="header-cta">
+        <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
+        </button>
+
+        <button class="icon-btn" id="themeBtn" aria-label="Switch theme" title="Switch theme">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <a class="btn primary" href="#join">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
+          <span class="label">Openings</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="content">
+    <!-- ============= HERO ============= -->
+    <section id="home" class="hero wrap">
+      <div class="hero-grid">
+        <article class="hero-card">
+          <div class="hero-content">
+            <div class="kicker"><span class="dot"></span> UCL · Department of Computer Science · London</div>
+
+            <h1>
+              We study <span class="hl">animals</span>  through the lens of Robotics/AI.
+            </h1>
+
+            <p>
+              Robotics-Enabled Biology Lab (REBL) is a research group at <strong>University College London</strong> working at the
+              intersection of <strong>robotics</strong>, <strong>sensing</strong> and
+              <strong>biology</strong>.
+            </p>
+
+            <div class="pill-row" aria-label="Research focus">
+              <span class="pill"><span class="chip"></span><b>Bio-inspired Robotics</b></span>
+              <span class="pill"><span class="chip"></span><b>Biomechanics</b></span>
+              <span class="pill"><span class="chip"></span><b>Sensor fusion</b></span>
+            </div>
+
+            <div class="hero-actions">
+              <a class="btn primary" href="#publications">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M4 5h12a3 3 0 0 1 3 3v11H7a3 3 0 0 0-3 3V5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                  <path d="M19 19H7a3 3 0 0 0-3 3" stroke="currentColor" stroke-width="1.8"/>
+                </svg>
+                Read our publications
+              </a>
+              <a class="btn" href="#research">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.8"/>
+                  <path d="m20 20-4.3-4.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+                What we work on
+              </a>
+              <a class="btn" href="#join">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="currentColor" stroke-width="1.8"/>
+                  <path d="M4 21a8 8 0 0 1 16 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+                Join the lab
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <aside class="hero-aside">
+          <div class="panel">
+            <div class="panel-hd">
+              <h3>Opportunities</h3>
+              <span class="badge">Hiring</span>
+            </div>
+            <div class="panel-bd">
+              <p>
+                We are recruiting <b style="color:var(--text)">postdocs</b>.
+              </p>
+              <!-- <p>
+                Strong fit for candidates with backgrounds in robotics, ML, or sensing — and
+                an interest in combining all three. Applicants from groups under-represented in CS
+                are particularly encouraged to apply.
+              </p> -->
+              <p>
+                <b style="color:var(--text)">UCL students</b>: we have various projects for intern and MEng/MSc theses. Email the PI with a CV and a short statement of research interests.
+              </p>
+              <div class="hero-actions" style="margin-top:6px">
+                <a class="btn primary" href="#join">See open positions</a>
+                <a class="btn" href="mailto:amir.patel@ucl.ac.uk">Email the PI</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="panel">
+            <div class="panel-hd">
+              <h3>Latest from the lab</h3>
+              <span class="badge" style="background:transparent;border-color:var(--stroke);color:var(--muted)">May 2026</span>
+            </div>
+            <div class="panel-bd">
+              <p><b style="color:var(--text)">Two REBL papers accepted at NeurIPS 2026</b> — on closed-loop binder discovery and uncertainty-aware microscopy.</p>
+              <p>The lab will host the second <b style="color:var(--text)">London Lab-Automation Day</b> at UCL on 12 June. Open to academics and industry collaborators.</p>
+            </div>
+          </div> -->
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============= RESEARCH ============= -->
+    <section id="research" class="section wrap">
+      <div class="kicker"><span class="dot"></span> Research</div>
+      <h2>What we work on.</h2>
+      <p style="max-width: 66ch; color: var(--muted); margin: 0 0 22px; line-height:1.65">
+        We study how animals achieve agility and speed and then apply those insights to robotics.
+      </p>
+
+      <div class="grid cols-3">
+        <article class="card">
+          <h3>Bio-inspired Robotics</h3>
+          <p>We build physical models (robots) that mirror key biological features to study cheetah locomotion.</p>
+          <div class="meta">
+            <span class="tag"><span class="pin"></span>Robotics</span>
+            <span class="tag"><span class="pin"></span>Optimal control</span>
+            <span class="tag"><span class="pin"></span>RL</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Wildlife Motion Capture & Sensor Fusion</h3>
+          <p>We develop non-invasive methods to study wild animals in unstructured environments.</p>
+          <div class="meta">
+            <span class="tag"><span class="pin"></span>Sensing</span>
+            <span class="tag"><span class="pin"></span>ML</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============= PEOPLE ============= -->
+    <section id="people" class="section wrap">
+      <div class="kicker"><span class="dot"></span> People</div>
+      <h2>Who we are.</h2>
+      <p style="max-width: 66ch; color: var(--muted); margin: 0 0 22px; line-height:1.65">
+        A small group of computer scientists, engineers and biologists. Backgrounds in robotics, computer vision,
+        machine learning, and sensing — all in one corridor in UCL East.
+      </p>
+
+      <div class="people-grid">
+        <!-- PI -->
+        <div class="person lead">
+          <div class="photo">
+            <img src="assets/people/amir.png" alt="Dr. Amir Patel" />
+          </div>
+          <div class="info">
+            <h3>Dr. Amir Patel</h3>
+            <p>Principal Investigator · UCL CS</p>
+            <p style="margin-top:6px">Previously director at African Robotics Unit, University of Cape Town.</p>
+            <div class="links">
+              <a href="https://profiles.ucl.ac.uk/100115-amir-patel">Page</a><a href="https://scholar.google.co.uk/citations?user=RxMigV4AAAAJ&hl=en">Scholar</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Postdocs -->
+        <!-- <div class="person">
+          <div class="photo">
+            <svg viewBox="0 0 80 80" preserveAspectRatio="none" aria-hidden="true">
+              <rect width="80" height="80" fill="#1a1a17"/>
+              <circle cx="40" cy="30" r="14" fill="#ffc72c"/>
+              <path d="M14 80c0-16 11-26 26-26s26 10 26 26" fill="#ffc72c"/>
+            </svg>
+          </div>
+          <div class="info">
+            <h3>Postdoc One</h3>
+            <p>Postdoctoral Researcher</p>
+            <p style="margin-top:6px">Protocol description languages and reproducibility tooling.</p>
+            <div class="links"><a href="#">Page</a><a href="#">Scholar</a></div>
+          </div>
+        </div> -->
+
+        <!-- PhDs -->
+        <div class="person">
+          <div class="photo">
+            <img src="assets/people/shengyang.png" alt="Mr. Shengyang Zhuang" />
+          </div>
+          <div class="info">
+            <h3>Mr. Shengyang Zhuang</h3>
+            <p>PhD student · UCL CS &amp MathWorks</p>
+            <p style="margin-top:6px">Inverse reinforcement learning for cheetah locomotion.</p>
+            <div class="links"><a href="https://shengyangzhuang.github.io/">Page</a></div>
+          </div>
+        </div>
+
+        <div class="person">
+          <div class="photo">
+            <img src="assets/people/michael.jpg" alt="Mr. Michael Alummoottil" />
+          </div>
+          <div class="info">
+            <h3>Mr. Michael Alummoottil</h3>
+            <p>PhD student · UCL CS &amp NERC AI-INTERVENE CDT</p>
+            <p style="margin-top:6px">Multi-sensor fusion for remote wildlife health monitoring.</p>
+            <div class="links"><a href="https://www.linkedin.com/in/michaelalumm/">Page</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= PUBLICATIONS ============= -->
+    <section id="publications" class="section wrap">
+      <div class="kicker"><span class="dot"></span> Publications</div>
+      <h2>Selected work.</h2>
+      <p style="max-width: 66ch; color: var(--muted); margin: 0 0 4px; line-height:1.65">
+        A filterable list. We try to keep code, data and protocol descriptions alongside every
+        paper — if a link is missing here it's a bug, not a policy.
+      </p>
+
+      <div id="pubs">
+        <div class="pub-tools">
+          <label class="input" for="pubSearch" style="flex:1 1 280px">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.8"/>
+              <path d="m20 20-4.3-4.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+            <input id="pubSearch" type="search" placeholder="Search titles, authors, venues…  (press / to focus)" autocomplete="off" />
+          </label>
+
+          <div class="chips" role="group" aria-label="Filter by year">
+            <button class="chipbtn" data-year="all" aria-pressed="true">All years</button>
+            <button class="chipbtn" data-year="2021">2021</button>
+            <button class="chipbtn" data-year="2019">2019</button>
+            <button class="chipbtn" data-year="2015">2015</button>
+            <button class="chipbtn" data-year="2013">2013</button>
+          </div>
+
+          <div class="chips" role="group" aria-label="Filter by type">
+            <button class="chipbtn" data-type="all" aria-pressed="true">All types</button>
+            <button class="chipbtn" data-type="conference">Conference</button>
+            <button class="chipbtn" data-type="journal">Journal</button>
+          </div>
+        </div>
+
+        <p style="color:var(--muted2); font-family:var(--mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; margin:0 0 14px">
+          Showing <span id="pubCount">5</span> of 5
+        </p>
+
+        <div class="pub-list">
+          <article class="pub" data-year="2021" data-kind="conference">
+            <div class="top">
+              <div>
+                <h3>AcinoSet: A 3D Pose Estimation Dataset and Baseline Models for Cheetahs in the Wild</h3>
+                <p class="byline">D. Joska, L. Clark, N. Muramatsu, R. Jericevich, F. Nicolls, A. Mathis, <strong>A. Patel</strong></p>
+                <p class="venue">ICRA · IEEE International Conference on Robotics and Automation · 2021</p>
+              </div>
+              <span class="tag"><span class="pin"></span>Conference</span>
+            </div>
+            <div class="links">
+              <a class="small-link" href="#">PDF</a>
+              <a class="small-link" href="https://arxiv.org/abs/2103.13282">arXiv</a>
+              <a class="small-link" href="#">Dataset</a>
+            </div>
+            <details class="bib">
+              <summary>BibTeX</summary>
+<pre>@inproceedings{joska2021acinoset,
+  title     = {{AcinoSet}: A 3D Pose Estimation Dataset and Baseline Models for Cheetahs in the Wild},
+  author    = {Joska, Daniel and Clark, Liam and Muramatsu, Naoya and Jericevich, Ricardo and Nicolls, Fred and Mathis, Alexander and Patel, Amir},
+  booktitle = {IEEE International Conference on Robotics and Automation},
+  year      = {2021}
+}</pre>
+            </details>
+          </article>
+
+          <article class="pub" data-year="2019" data-kind="journal">
+            <div class="top">
+              <div>
+                <h3>Using DeepLabCut for 3D markerless pose estimation across species and behaviors</h3>
+                <p class="byline">T. Nath, A. Mathis, A. C. Chen, <strong>A. Patel</strong>, M. Bethge, M. W. Mathis</p>
+                <p class="venue">Nature Protocols · 2019 · 1,783 citations</p>
+              </div>
+              <span class="tag"><span class="pin"></span>Journal</span>
+            </div>
+            <div class="links">
+              <a class="small-link" href="#">PDF</a>
+              <a class="small-link" href="#">DOI</a>
+            </div>
+            <details class="bib">
+              <summary>BibTeX</summary>
+<pre>@article{nath2019deeplabcut,
+  title   = {Using {DeepLabCut} for 3D markerless pose estimation across species and behaviors},
+  author  = {Nath, Tanmay and Mathis, Alexander and Chen, An Chi and Patel, Amir and Bethge, Matthias and Mathis, Mackenzie Weygandt},
+  journal = {Nature Protocols},
+  year    = {2019}
+}</pre>
+            </details>
+          </article>
+
+          <article class="pub" data-year="2019" data-kind="journal">
+            <div class="top">
+              <div>
+                <h3>Contact-implicit trajectory optimization using orthogonal collocation</h3>
+                <p class="byline"><strong>A. Patel</strong>, S. L. Shield, S. Kazi, A. M. Johnson, L. T. Biegler</p>
+                <p class="venue">IEEE Robotics and Automation Letters · 2019</p>
+              </div>
+              <span class="tag"><span class="pin"></span>Journal</span>
+            </div>
+            <div class="links">
+              <a class="small-link" href="#">PDF</a>
+              <a class="small-link" href="#">DOI</a>
+            </div>
+            <details class="bib">
+              <summary>BibTeX</summary>
+<pre>@article{patel2019contact,
+  title   = {Contact-implicit trajectory optimization using orthogonal collocation},
+  author  = {Patel, Amir and Shield, Stacey L. and Kazi, Shameeq and Johnson, Aaron M. and Biegler, Lorenz T.},
+  journal = {IEEE Robotics and Automation Letters},
+  year    = {2019}
+}</pre>
+            </details>
+          </article>
+
+          <article class="pub" data-year="2015" data-kind="journal">
+            <div class="top">
+              <div>
+                <h3>On the Conical Motion of a Two-Degree-of-Freedom Tail Inspired by the Cheetah</h3>
+                <p class="byline"><strong>A. Patel</strong>, E. Boje</p>
+                <p class="venue">IEEE Transactions on Robotics · 2015</p>
+              </div>
+              <span class="tag"><span class="pin"></span>Journal</span>
+            </div>
+            <div class="links">
+              <a class="small-link" href="#">PDF</a>
+              <a class="small-link" href="#">DOI</a>
+            </div>
+            <details class="bib">
+              <summary>BibTeX</summary>
+<pre>@article{patel2015conical,
+  title   = {On the Conical Motion of a Two-Degree-of-Freedom Tail Inspired by the Cheetah},
+  author  = {Patel, Amir and Boje, Edward},
+  journal = {IEEE Transactions on Robotics},
+  year    = {2015}
+}</pre>
+            </details>
+          </article>
+
+          <article class="pub" data-year="2013" data-kind="conference">
+            <div class="top">
+              <div>
+                <h3>Rapid turning at high-speed: Inspirations from the cheetah's tail</h3>
+                <p class="byline"><strong>A. Patel</strong>, M. Braae</p>
+                <p class="venue">IROS · IEEE/RSJ International Conference on Intelligent Robots and Systems · 2013</p>
+              </div>
+              <span class="tag"><span class="pin"></span>Conference</span>
+            </div>
+            <div class="links">
+              <a class="small-link" href="#">PDF</a>
+            </div>
+            <details class="bib">
+              <summary>BibTeX</summary>
+<pre>@inproceedings{patel2013rapid,
+  title     = {Rapid turning at high-speed: Inspirations from the cheetah's tail},
+  author    = {Patel, Amir and Braae, Mark},
+  booktitle = {IEEE/RSJ International Conference on Intelligent Robots and Systems},
+  year      = {2013}
+}</pre>
+            </details>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= NEWS ============= -->
+    <section id="news" class="section wrap">
+      <div class="kicker"><span class="dot"></span> News</div>
+      <h2>Recent activity.</h2>
+
+      <div class="news" style="margin-top: 18px">
+        <div class="news-item">
+          <time datetime="2026-05">May 2026</time>
+          <p><strong>Website established</strong>: V1 of the REBL website is now live.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= JOIN ============= -->
+    <section id="join" class="section wrap">
+      <div class="kicker"><span class="dot"></span> Join</div>
+      <h2>Open positions.</h2>
+      <p style="max-width: 66ch; color: var(--muted); margin: 0 0 22px; line-height:1.65">
+        We are actively hiring at every level — postdoc, PhD, RSE, and short MSc / MEng
+        projects for UCL students. Email the PI with a CV, a short statement of research
+        interests, and (for PhD applicants) a paragraph on a project you'd want to lead.
+      </p>
+
+      <div class="grid cols-2">
+        <article class="card">
+          <h3>Postdoctoral Researcher</h3>
+          <p>Description of the postdoctoral researcher position.</p>
+          <div class="meta">
+            <span class="tag"><span class="pin"></span>Postdoc</span>
+            <span class="tag"><span class="pin"></span>2 years</span>
+            <span class="tag"><span class="pin"></span>Funded</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============= CONTACT ============= -->
+    <section id="contact" class="section wrap">
+      <div class="kicker"><span class="dot"></span> Contact</div>
+      <h2>Get in touch.</h2>
+
+      <div class="contact-grid" style="margin-top: 18px">
+        <article class="card">
+          <h3>Lab address</h3>
+          <ul class="list">
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 22s7-7 7-13a7 7 0 1 0-14 0c0 6 7 13 7 13Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <circle cx="12" cy="9" r="2.4" stroke="currentColor" stroke-width="1.8"/>
+              </svg>
+              <span>
+                <b>Robotics-Enabled Biology Lab</b><br />
+                Department of Computer Science<br />
+                University College London<br />
+                One Pool Street, 1 Pool Street, London E20 2AF · United Kingdom
+              </span>
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="m4 7 8 7 8-7" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              </svg>
+              <span><b>Email:</b> <button class="code" data-copy="amir.patel@ucl.ac.uk" title="Copy email">amir.patel@ucl.ac.uk</button></span>
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" stroke="currentColor" stroke-width="1.8"/>
+              </svg>
+              <span><b>Web:</b> rebl-ucl.github.io</span>
+            </li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Channels &amp; collaborations</h3>
+          <ul class="list">
+            <!-- <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 7a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7Z" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M8 11v6M8 8v.01M12 17v-4a2 2 0 1 1 4 0v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+              <span><b>Twitter / X:</b> @rebl_lab</span>
+            </li> -->
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M9 19c-4 1-4-2-6-2.5M15 22v-3a3 3 0 0 0-1-2.3c3-.3 6-1.5 6-6a4.7 4.7 0 0 0-1.3-3.2 4.4 4.4 0 0 0-.1-3.2s-1-.3-3.4 1.3a11.7 11.7 0 0 0-6.4 0c-2.4-1.6-3.4-1.3-3.4-1.3a4.4 4.4 0 0 0-.1 3.2A4.7 4.7 0 0 0 4 10.2c0 4.5 3 5.7 6 6a3 3 0 0 0-1 2.3v3" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              </svg>
+              <span><b>GitHub:</b> github.com/rebl-ucl</span>
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 3v18M5 8h14M5 16h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+              <span>Open to <b>industry &amp; academic collaborations</b> — get in touch.</span>
+            </li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer wrap">
+    <div class="row">
+      <strong>REBL · UCL Computer Science</strong>
+      <span>© 2026 · Robotics-Enabled Biology Lab · University College London</span>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
