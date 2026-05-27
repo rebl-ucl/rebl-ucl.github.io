@@ -169,4 +169,37 @@
     });
     applyFilters();
   }
+
+  // ---------- Hero cheetah fade ----------
+  const cheetahImg = document.querySelector('.hero-cheetah');
+  const researchSec = document.querySelector('#research');
+  if (cheetahImg && researchSec) {
+    const BASE_OPACITY = 1.0;
+    function updateCheetah() {
+      const top = researchSec.getBoundingClientRect().top;
+      const vh = window.innerHeight;
+      cheetahImg.style.opacity = (BASE_OPACITY * Math.max(0, Math.min(1, top / vh))).toFixed(3);
+    }
+    window.addEventListener('scroll', updateCheetah, { passive: true });
+    updateCheetah();
+  }
+
+  // ---------- People expand/collapse ----------
+  const peopleGrid = $(".people-grid");
+  $$(".person").forEach((card, index) => {
+    card.addEventListener("click", (e) => {
+      if (e.target.closest("a")) return;
+      const isExpanded = card.classList.contains("expanded");
+      $$(".person.expanded").forEach((c) => c.classList.remove("expanded"));
+      if (peopleGrid) {
+        peopleGrid.classList.remove("expanded-0", "expanded-1", "expanded-2", "has-expanded");
+      }
+      if (!isExpanded) {
+        card.classList.add("expanded");
+        if (card.hasAttribute("data-wide") && peopleGrid) {
+          peopleGrid.classList.add(`expanded-${index}`, "has-expanded");
+        }
+      }
+    });
+  });
 })();

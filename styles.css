@@ -223,6 +223,26 @@ html[data-theme="light"] .nav a[aria-current="page"]{
 
 .menu-btn{ display:none }
 
+/* ===== Hero cheetah ===== */
+.hero-cheetah{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  object-position: right center;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  display: block;
+  filter:
+    sepia(0.12)
+    saturate(0.88)
+    brightness(1.02)
+    contrast(0.94);
+}
+
 /* ===== Hero ===== */
 .hero{ padding: 64px 0 0; position: relative }
 
@@ -550,12 +570,16 @@ html[data-theme="light"] details.bib pre{ background: rgba(13,13,11,0.05); color
 
 /* ===== People ===== */
 .people-grid{
-  display:grid;
-  grid-template-columns: repeat(12, 1fr);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 14px;
+  transition: grid-template-columns 0.42s cubic-bezier(0.4, 0, 0.2, 1);
 }
+.people-grid.expanded-0{ grid-template-columns: 3.5fr 1.25fr 1.25fr; }
+.people-grid.expanded-1{ grid-template-columns: 1.25fr 3.5fr 1.25fr; }
+.people-grid.expanded-2{ grid-template-columns: 1.25fr 1.25fr 3.5fr; }
+
 .person{
-  grid-column: span 4;
   display:flex; gap: 14px;
   padding: 16px;
   border-radius: var(--radius-lg);
@@ -563,6 +587,10 @@ html[data-theme="light"] details.bib pre{ background: rgba(13,13,11,0.05); color
   border: 1px solid var(--stroke);
   box-shadow: var(--shadow2);
   transition: transform 160ms ease, border-color 160ms ease;
+  min-width: 0;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
 }
 .person:hover{ transform: translateY(-2px); border-color: var(--yellow-3) }
 .person .photo{
@@ -572,11 +600,14 @@ html[data-theme="light"] details.bib pre{ background: rgba(13,13,11,0.05); color
   flex: 0 0 auto;
   overflow: hidden;
   background: var(--yellow);
+  transition: width 0.42s cubic-bezier(0.4, 0, 0.2, 1),
+              height 0.42s cubic-bezier(0.4, 0, 0.2, 1),
+              border-radius 0.42s ease;
 }
 .person .photo svg,
 .person .photo img{ width: 100%; height: 100%; object-fit: cover; display: block }
 .person.lead .photo{ background: var(--yellow) }
-.person .info{ min-width:0 }
+.person .info{ min-width: 0; flex: 1 }
 .person h3{
   margin:0 0 4px;
   font-family: var(--sans);
@@ -604,6 +635,55 @@ html[data-theme="light"] details.bib pre{ background: rgba(13,13,11,0.05); color
   background: rgba(248,242,224,0.05);
 }
 .person .links a:hover{ background: var(--yellow); color: var(--ink); border-color: var(--yellow-3) }
+.person .expand-icon{
+  position: absolute;
+  top: 14px; right: 14px;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1;
+  pointer-events: none;
+  transition: transform 0.28s ease, color 0.18s ease;
+  font-family: var(--sans);
+}
+.person.expanded .expand-icon{ transform: rotate(180deg); color: var(--yellow); }
+.person .extra{
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  margin-top: 0;
+  transition: max-height 0.42s ease, opacity 0.30s ease, margin-top 0.30s ease;
+}
+.person.expanded .extra{
+  max-height: 400px;
+  opacity: 1;
+  margin-top: 8px;
+}
+.person.expanded{
+  border-color: var(--yellow-3);
+  transform: translateY(-2px);
+  align-items: flex-start;
+}
+.person.expanded .photo{
+  width: 88px;
+  height: 88px;
+  border-radius: 20px;
+}
+
+/* Compact siblings when another card is expanded */
+.people-grid.has-expanded .person:not(.expanded){
+  align-self: start;
+}
+.people-grid.has-expanded .person:not(.expanded) .info p + p,
+.people-grid.has-expanded .person:not(.expanded) .links,
+.people-grid.has-expanded .person:not(.expanded) .extra,
+.people-grid.has-expanded .person:not(.expanded) .expand-icon{
+  display: none;
+}
+.people-grid.has-expanded .person:not(.expanded) h3{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 /* ===== News ===== */
 .news{ display:grid; gap: 10px }
@@ -688,6 +768,23 @@ html[data-theme="light"] details.bib pre{ background: rgba(13,13,11,0.05); color
   display:flex; flex-wrap:wrap; gap:12px;
   align-items:center; justify-content:space-between;
 }
+.footer-brand{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.footer-logos{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.uclcs-logo{
+  height: 36px;
+  width: auto;
+  opacity: 0.70;
+  display: block;
+}
+html[data-theme="light"] .uclcs-logo{ opacity: 0.85; }
 .footer .row strong{
   color: var(--text);
   font-family: var(--display);
@@ -700,7 +797,10 @@ html[data-theme="light"] details.bib pre{ background: rgba(13,13,11,0.05); color
   .hero-grid{ grid-template-columns: 1fr }
   .contact-grid{ grid-template-columns: 1fr }
   .grid.cols-3{ grid-template-columns: repeat(2, minmax(0,1fr)) }
-  .person{ grid-column: span 6 }
+  .people-grid{ grid-template-columns: 1fr 1fr; }
+  .people-grid.expanded-0,
+  .people-grid.expanded-1,
+  .people-grid.expanded-2{ grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 720px){
   .wrap{ padding: 0 16px }
@@ -724,8 +824,10 @@ html[data-theme="light"] details.bib pre{ background: rgba(13,13,11,0.05); color
   .nav.open{ display:flex }
   .menu-btn{ display:grid }
   .grid.cols-3, .grid.cols-2{ grid-template-columns: 1fr }
-  .people-grid{ grid-template-columns: 1fr }
-  .person{ grid-column: unset }
+  .people-grid,
+  .people-grid.expanded-0,
+  .people-grid.expanded-1,
+  .people-grid.expanded-2{ grid-template-columns: 1fr; }
   .hero-content{ padding: 24px 22px 22px }
 }
 
