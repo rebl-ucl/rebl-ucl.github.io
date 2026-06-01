@@ -635,6 +635,38 @@ html[data-theme="light"] details.bib pre{ background: rgba(13,13,11,0.05); color
   background: rgba(248,242,224,0.05);
 }
 .person .links a:hover{ background: var(--yellow); color: var(--ink); border-color: var(--yellow-3) }
+/* Thesis card layout */
+.thesis-grid.grid{ gap: 10px; align-items: start; }
+.thesis-grid .person{ padding: 13px; }
+.thesis-grid .person-header{
+  display: flex; align-items: flex-start; gap: 8px;
+  padding-right: 18px; /* clear the expand-icon */
+}
+.thesis-grid .person-header h3{
+  flex: 1; margin: 0;
+  font-size: 12.5px; line-height: 1.4;
+}
+.thesis-grid .meta{
+  display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px;
+}
+.thesis-grid .tag{
+  padding: 2px 6px; font-size: 10px; gap: 4px;
+}
+.thesis-grid .tag .pin{ width: 5px; height: 5px; }
+.thesis-grid .person.expanded .extra{ margin-top: 10px; }
+.thesis-grid .extra p{ font-size: 12.5px; }
+
+.thesis-pdf{
+  display: inline-flex; align-items: center; gap: 4px; flex-shrink: 0;
+  color: var(--muted); text-decoration: none;
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em;
+  padding: 2px 7px; border-radius: 999px;
+  border: 1px solid var(--stroke);
+  background: rgba(248,242,224,0.05);
+  transition: background 0.18s, color 0.18s, border-color 0.18s;
+  white-space: nowrap;
+}
+.thesis-pdf:hover{ background: var(--yellow); color: var(--ink); border-color: var(--yellow-3) }
 .person .expand-icon{
   position: absolute;
   top: 14px; right: 14px;

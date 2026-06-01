@@ -184,19 +184,20 @@
     updateCheetah();
   }
 
-  // ---------- People expand/collapse ----------
+  // ---------- People & thesis expand/collapse ----------
   const peopleGrid = $(".people-grid");
   $$(".person").forEach((card, index) => {
     card.addEventListener("click", (e) => {
       if (e.target.closest("a")) return;
       const isExpanded = card.classList.contains("expanded");
-      $$(".person.expanded").forEach((c) => c.classList.remove("expanded"));
-      if (peopleGrid) {
+      const group = card.parentElement;
+      $$(".person.expanded", group).forEach((c) => c.classList.remove("expanded"));
+      if (group === peopleGrid) {
         peopleGrid.classList.remove("expanded-0", "expanded-1", "expanded-2", "has-expanded");
       }
       if (!isExpanded) {
         card.classList.add("expanded");
-        if (card.hasAttribute("data-wide") && peopleGrid) {
+        if (card.hasAttribute("data-wide") && group === peopleGrid) {
           peopleGrid.classList.add(`expanded-${index}`, "has-expanded");
         }
       }
