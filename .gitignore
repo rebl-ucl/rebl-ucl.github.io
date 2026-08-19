@@ -1,2 +1,8 @@
 .claude/
 .thumbnail
+
+# Source documents kept alongside the site, not part of it
+*.pptx
+*.docx
+# Office lock files
+~$*
