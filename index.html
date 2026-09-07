@@ -28,25 +28,14 @@
 
       <div class="header-right">
         <nav class="nav" id="nav" aria-label="Primary navigation">
+          <a href="#home">Home</a>
           <a href="#research">Research</a>
-          <a href="#people">People</a>
-          <a href="#publications">Publications</a>
-          <a href="#news">News</a>
+          <a href="#projects">Projects</a>
+          <a href="#team">Team</a>
+          <a href="#outputs">Outputs</a>
           <a href="#join">Join</a>
           <a href="#contact">Contact</a>
         </nav>
-
-        <button class="icon-btn theme-btn" id="themeBtn" aria-label="Switch to night mode" title="Switch to night mode">
-          <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" stroke="currentColor" stroke-width="1.8"
-              stroke-linejoin="round" />
-          </svg>
-          <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8" />
-            <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
-              stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-          </svg>
-        </button>
 
         <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
           <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -59,7 +48,7 @@
 
   <main id="content" style="position:relative;z-index:1">
     <!-- ============= HERO ============= -->
-    <section id="home" class="hero">
+    <section id="home" class="hero page">
       <div class="hero-frame">
         <img class="hero-bg" src="assets/cheetahBackground.PNG" alt="" aria-hidden="true" />
         <div class="hero-scrim" aria-hidden="true"></div>
@@ -78,7 +67,7 @@
 
           <div class="hero-btns">
             <a class="hero-btn solid" href="#research">Explore research</a>
-            <a class="hero-btn outline" href="#people">Meet the team</a>
+            <a class="hero-btn outline" href="#team">Meet the team</a>
           </div>
         </div>
 
@@ -92,68 +81,123 @@
     </section>
 
     <!-- ============= RESEARCH ============= -->
-    <section id="research" class="section wrap">
+    <section id="research" class="section wrap page">
       <div class="kicker"><span class="dot"></span> Research</div>
-      <h2 class="display-title">A two-way exchange between <span class="hl-robotics">robotics</span> and <span
-          class="hl-biology">biology</span>.</h2>
-      <p style="max-width: 90ch; color: var(--muted); margin: 0 0 22px; line-height:1.65">
-        REBL combines robotics, AI, biomechanics and field biology to uncover how animals move, sense and survive.
-      </p>
+
+      <div class="research-hero">
+        <h2 class="research-statement">
+          <span class="line">A Two-Way Exchange</span>
+          <span class="line">Between <span class="hl-robotics">Robotics</span> and <span
+              class="hl-biology">Biology</span></span>
+        </h2>
+        <p class="research-lede">
+          REBL combines robotics, AI, biomechanics and field biology to uncover how animals move, sense and survive.
+        </p>
+      </div>
+
+      <hr class="rule" />
 
       <figure class="research-themes">
-        <img src="assets/research/research_theme_no_bg.png" loading="lazy"
+        <img src="assets/research/REBL_howWeDoResearch_blackline_4K.png" loading="lazy"
           alt="The lab's six research themes arranged around a running cheetah: multimodal sensing, computer vision and state estimation feed measurements in; mechanical modelling, optimisation and control, and physical robots translate them back out." />
       </figure>
 
-      <h2 class="display-title">Projects.</h2>
+    </section>
+
+    <!-- ============= PROJECTS ============= -->
+    <section id="projects" class="section wrap page">
+      <div class="kicker"><span class="dot"></span> Projects</div>
+      <h2 class="display-title">What we are working on.</h2>
       <p style="max-width: 130ch; color: var(--muted); margin: 0 0 22px; line-height:1.65">
         Our projects combine field observations, computational models and physical experiments to answer 
         specific questions about animals and create new technologies.
       </p>
 
-      <div class="grid cols-3">
+      <div class="grid cols-2 project-grid">
         <article class="card project-card">
-          <div class="thumb"><img src="assets/projects/wildlife-health-monitoring.jpg" alt="" loading="lazy" /></div>
+          <span class="expand-icon">▾</span>
+          <div class="thumb"><img src="assets/research/REBL_icon1.png" alt="" loading="lazy" /></div>
           <div class="info">
             <h3>Wildlife Health Monitoring</h3>
             <p>Can we measure the health of wildlife remotely and without contact?</p>
-          </div>
-        </article>
-
-        <article class="card project-card">
-          <div class="thumb"><img src="assets/projects/high-speed-motion-capture.jpg" alt="" loading="lazy" /></div>
-          <div class="info">
-            <h3>High-Speed Motion Capture</h3>
-            <p>Can we reconstruct complete animal motion outside the controlled laboratory?</p>
-          </div>
-        </article>
-
-        <article class="card project-card">
-          <div class="thumb"><img src="assets/projects/cheetah-neuromechanics.jpg" alt="" loading="lazy" /></div>
-          <div class="info">
-            <h3>Cheetah Neuromechanics</h3>
-            <p>What control strategies explain the cheetah’s exceptional acceleration, braking and turning?</p>
-            <div class="meta">
-              <span class="tag"><span class="pin"></span>Robotics</span>
-              <span class="tag"><span class="pin"></span>Optimal control</span>
-              <span class="tag"><span class="pin"></span>RL</span>
+            <div class="extra">
+              <p>Vital signs are among the first things to change when an animal is stressed or unwell, but measuring
+                them normally means capture and sedation. We combine thermal imaging, long-range video and
+                physics-informed models of heat transfer through fur to recover those signals at a distance, so that
+                animals can be screened without ever being touched.</p>
+              <div class="meta">
+                <span class="tag"><span class="pin"></span>Sensing</span>
+                <span class="tag"><span class="pin"></span>Thermal imaging</span>
+                <span class="tag"><span class="pin"></span>Conservation</span>
+              </div>
             </div>
           </div>
         </article>
 
         <article class="card project-card">
-          <div class="thumb"><img src="assets/projects/spider-web-acoustic-sensing.jpg" alt="" loading="lazy" /></div>
+          <span class="expand-icon">▾</span>
+          <div class="thumb"><img src="assets/research/REBL_icon2.png" alt="" loading="lazy" /></div>
+          <div class="info">
+            <h3>High-Speed Motion Capture</h3>
+            <p>Can we reconstruct complete animal motion outside the controlled laboratory?</p>
+            <div class="extra">
+              <p>Laboratory motion capture cannot follow a cheetah across open ground. Through AcinoSet and WildPose we
+                pair solid-state LiDAR with synchronised high-speed cameras to reconstruct full 3D body and limb motion
+                in the field, giving biomechanics the kind of measurement that was previously only possible indoors.</p>
+              <div class="meta">
+                <span class="tag"><span class="pin"></span>LiDAR</span>
+                <span class="tag"><span class="pin"></span>Computer vision</span>
+                <span class="tag"><span class="pin"></span>3D pose</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card project-card">
+          <span class="expand-icon">▾</span>
+          <div class="thumb"><img src="assets/research/REBL_icon3.png" alt="" loading="lazy" /></div>
+          <div class="info">
+            <h3>Cheetah Neuromechanics</h3>
+            <p>What control strategies explain the cheetah’s exceptional acceleration, braking and turning?</p>
+            <div class="extra">
+              <p>The cheetah accelerates, brakes and turns harder than any legged robot. We use trajectory optimisation,
+                inverse reinforcement learning and physical robot platforms — including a tail-and-spine
+                “half-cheetah” — to work out which strategies the animal is actually using, and what a
+                machine would have to do to match it.</p>
+              <div class="meta">
+                <span class="tag"><span class="pin"></span>Robotics</span>
+                <span class="tag"><span class="pin"></span>Optimal control</span>
+                <span class="tag"><span class="pin"></span>RL</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card project-card">
+          <span class="expand-icon">▾</span>
+          <div class="thumb"><img src="assets/research/REBL_icon4.png" alt="" loading="lazy" /></div>
           <div class="info">
             <h3>Spider-Web-Inspired Acoustic Sensing</h3>
             <p>Can spider webs inspire a new class of distributed acoustic sensors?</p>
+            <div class="extra">
+              <p>A spider’s web is already a sensor: the animal reads prey, wind and intruders from vibrations
+                traveling along the silk. We are asking whether an engineered web can do the same — a lightweight,
+                largely passive array that picks up sound and movement across a wide area without power-hungry
+                electronics at every node.</p>
+              <div class="meta">
+                <span class="tag"><span class="pin"></span>Bio-inspired sensing</span>
+                <span class="tag"><span class="pin"></span>Acoustics</span>
+                <span class="tag"><span class="pin"></span>Mechanics</span>
+              </div>
+            </div>
           </div>
         </article>
       </div>
     </section>
 
-    <!-- ============= PEOPLE ============= -->
-    <section id="people" class="section wrap">
-      <div class="kicker"><span class="dot"></span> People</div>
+    <!-- ============= TEAM ============= -->
+    <section id="team" class="section wrap page">
+      <div class="kicker"><span class="dot"></span> Team</div>
       <h2 class="display-title">Who we are.</h2>
       <p style="max-width: 100ch; color: var(--muted); margin: 0 0 22px; line-height:1.65">
         A small group of computer scientists, engineers and biologists working across disciplinary boundaries. <br>
@@ -208,18 +252,16 @@
           <div class="info">
             <h3>Shengyang Zhuang<a class="email-icon" href="mailto:shengyang.zhuang.25@ucl.ac.uk" aria-label="Email Shengyang Zhuang" title="Email Shengyang Zhuang"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /><path d="m4 7 8 7 8-7" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /></svg></a></h3>
             <p>PhD student · UCL CS &amp; MathWorks</p>
-            <p style="margin-top:6px">Inverse reinforcement learning for cheetah locomotion. </p>
-            <p style="margin-top:6px">
-              Co-supervised with Prof. Dimitrios Kanoulas.
-            </p>
+            <p class="person-q">Inverse reinforcement learning for cheetah locomotion.</p>
             <div class="extra">
-              <p style="margin-top:0">MRes: Imperial College London. <br>
+              <p>Co-supervised with Prof. Dimitrios Kanoulas.</p>
+              <p>MRes: Imperial College London. <br>
                 BEng: Harbin Institute of Technology.
               </p>
+              <div class="links"><a href="https://shengyangzhuang.github.io/">Homepage</a>
+                <!-- <a href="https://profiles.ucl.ac.uk/105497-shengyang-zhuang">UCL profile</a> -->
+                <a href="https://www.linkedin.com/in/shengyang-zhuang/">LinkedIn</a></div>
             </div>
-            <div class="links"><a href="https://shengyangzhuang.github.io/">Homepage</a>
-              <!-- <a href="https://profiles.ucl.ac.uk/105497-shengyang-zhuang">UCL profile</a> -->
-              <a href="https://www.linkedin.com/in/shengyang-zhuang/">LinkedIn</a></div>
           </div>
         </div>
 
@@ -231,16 +273,14 @@
           <div class="info">
             <h3>Michael Alummoottil<a class="email-icon" href="mailto:michael.alummoottil.25@ucl.ac.uk" aria-label="Email Michael Alummoottil" title="Email Michael Alummoottil"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /><path d="m4 7 8 7 8-7" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /></svg></a></h3>
             <p>PhD student · UCL CS &amp; NERC AI-INTERVENE CDT</p>
-            <p style="margin-top:6px">Multi-sensor fusion for remote wildlife health monitoring.</p>
-            <p style="margin-top:6px">
-              Co-supervised with Prof. Kate Johns.
-            </p>
+            <p class="person-q">Multi-sensor fusion for remote wildlife health monitoring.</p>
             <div class="extra">
-              <p style="margin-top:0">MSc: Imperial College London. <br>
+              <p>Co-supervised with Prof. Kate Johns.</p>
+              <p>MSc: Imperial College London. <br>
                 BEng: University of Cape Town.
               </p>
+              <div class="links"><a href="https://www.linkedin.com/in/michaelalumm/">LinkedIn</a></div>
             </div>
-            <div class="links"><a href="https://www.linkedin.com/in/michaelalumm/">LinkedIn</a></div>
           </div>
         </div>
 
@@ -252,28 +292,28 @@
           <div class="info">
             <h3>Jiaye Huang<a class="email-icon" href="mailto:jiaye.huang.25@ucl.ac.uk" aria-label="Email Jiaye Huang" title="Email Jiaye Huang"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /><path d="m4 7 8 7 8-7" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /></svg></a></h3>
             <p>PhD student · UCL CS</p>
-            <p style="margin-top:6px">Towards Robust High-Speed Animal Motion Capture with Solid-State LiDAR.</p>
-            <p style="margin-top:6px">
-              Co-supervised with Prof. Dimitrios Kanoulas.
-            </p>
+            <p class="person-q">Robust high-speed animal motion capture with solid-state LiDAR.</p>
             <div class="extra">
-              <p style="margin-top:0">MSc: Imperial College London.
-              </p>
+              <p>Co-supervised with Prof. Dimitrios Kanoulas.</p>
+              <p>MSc: Imperial College London.</p>
+              <div class="links"><a href="https://www.linkedin.com/in/jiaye-huang-37a490334/">LinkedIn</a></div>
             </div>
-            <div class="links"><a href="https://www.linkedin.com/in/jiaye-huang-37a490334/">LinkedIn</a></div>
           </div>
         </div>
 
         <div class="person">
+          <span class="expand-icon">▾</span>
           <div class="photo">
             <img src="assets/people/kam.jpeg" alt="Kamryn Norton" />
           </div>
           <div class="info">
             <h3>Kamryn Norton<a class="email-icon" href="mailto:kamryn10n@gmail.com" aria-label="Email Kamryn Norton" title="Email Kamryn Norton"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /><path d="m4 7 8 7 8-7" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /></svg></a></h3>
             <p>Collaborator · Engineer at Opti-Num Solutions</p>
-            <p style="margin-top:6px">Head stabilisation and tracking of running cheetah.
-            </p>
-            <div class="links"><a href="https://www.linkedin.com/in/kamnorton/">Homepage</a></div>
+            <p class="person-q">Head stabilisation and tracking of running cheetah.</p>
+            <div class="extra">
+              <p>Working with REBL from Cape Town on the vision and control side of head stabilisation.</p>
+              <div class="links"><a href="https://www.linkedin.com/in/kamnorton/">LinkedIn</a></div>
+            </div>
           </div>
         </div>
       </div>
@@ -293,7 +333,7 @@
             <div class="info">
               <h3>Jiahe Yu</h3>
               <p>Undergraduate student · UCL Biosciences</p>
-              <p style="margin-top:6px">Cheetah 3D pose estimation.</p>
+              <p class="person-q">Cheetah 3D pose estimation.</p>
             </div>
           </div>
 
@@ -304,16 +344,59 @@
             <div class="info">
               <h3>Thomas Moody</h3>
               <p>MEng Robotics and AI student · UCL CS</p>
-              <p style="margin-top:6px">Aerodynamics of Cheetah whisker sensing.</p>
+              <p class="person-q">Aerodynamics of Cheetah whisker sensing.</p>
             </div>
           </div>
         </div>
       </div>
+
+      <!-- ---- Recent activity ---- -->
+      <h3 class="people-subhead"><span class="dot"></span><span class="label">News</span></h3>
+
+      <h2 class="display-title">Latest from REBL.</h2>
+
+      <!-- Focusable so the list can be scrolled from the keyboard, not just a wheel. -->
+      <div class="news-scroll" tabindex="0" role="region" aria-label="Latest news from REBL">
+        <ol class="news">
+          <li class="news-item">
+            <time datetime="2026-08">Aug 2026</time>
+            <p><strong>Website established</strong>: V1 of the REBL website is now live.</p>
+          </li>
+          <li class="news-item">
+            <time datetime="2026-06">June 2026</time>
+            <p><strong>Amir awarded ARIA Grant</strong>: Amir's project, The Ecological Stethoscope, was awarded the
+              Engineering Ecosystem Resilience Seed Creators' Grant from Advanced Research + Invention Agency (ARIA).</p>
+          </li>
+          <li class="news-item">
+            <time datetime="2026-07">July 2026</time>
+            <p><strong>Jiaye joined REBL as a PhD student</strong>.</p>
+          </li>
+          <li class="news-item">
+            <time datetime="2026-06">June 2026</time>
+            <p><strong>Amir at ICRA 2026</strong>: Amir gave a keynote on "Brain Circulation: The Diaspora's Role in
+              African Robotics", at the Robotic Systems Designed for Underrepresented Communities event as part of the
+              Community Building Day at IEEE International Conference on Robotics and Automation (ICRA) 2026.</p>
+          </li>
+          <li class="news-item">
+            <time datetime="2026-04">April 2026</time>
+            <p><strong>REBL appeared in Rae Harbird Day</strong>: Shengyang and Michael gave lectures to KS3 students as
+              part of the UCL CS flagship outreach event.</p>
+          </li>
+          <li class="news-item">
+            <time datetime="2025-11">November 2025</time>
+            <p><strong>Michael joined REBL as a PhD student</strong>.</p>
+          </li>
+          <li class="news-item">
+            <time datetime="2025-10">October 2025</time>
+            <p><strong>Shengyang joined REBL as a PhD student</strong>.</p>
+          </li>
+        </ol>
+      </div>
     </section>
 
-    <!-- ============= PUBLICATIONS ============= -->
-    <section id="publications" class="section wrap">
-      <div class="kicker"><span class="dot"></span> Publications</div>
+    <!-- ============= OUTPUTS ============= -->
+    <section id="outputs" class="section wrap page">
+      <div class="kicker"><span class="dot"></span> Outputs</div>
       <h2 class="display-title">Selected work.</h2>
       <p style="max-width: 90ch; color: var(--muted); margin: 0 0 4px; line-height:1.65">
         REBL produces scientific findings, open datasets, software, sensing systems and robotic platforms.
@@ -457,65 +540,104 @@
           </div>
         </article>
       </div>
-    </section>
 
-    <!-- ============= NEWS ============= -->
-    <section id="news" class="section wrap">
-      <div class="kicker"><span class="dot"></span> News</div>
-      <h2 class="display-title">Recent activity.</h2>
+      <!-- ---- Robots & Experimental Systems ---- -->
+      <h2 class="display-title">Robots &amp; Experimental Systems.</h2>
+      <p style="max-width: 100ch; color: var(--muted); margin: 0 0 22px; line-height:1.65">
+        Physical platforms are how we test what the animal data suggests. Each machine isolates one question about
+        agility — and answering it usually sends us back to the cheetah with a sharper question.
+      </p>
 
-      <div class="news" style="margin-top: 18px">
-        <div class="news-item">
-          <time datetime="2026-08">Aug 2026</time>
-          <p><strong>Website established</strong>: V1 of the REBL website is now live.</p>
-        </div>
-        <div class="news-item">
-          <time datetime="2026-06">June 2026</time>
-          <p><strong>Amir awarded ARIA Grant</strong>: Amir's project, The Ecological Stethoscope, was awarded the
-            Engineering Ecosystem Resilience Seed Creators' Grant from Advanced Research + Invention Agency (ARIA).</p>
-        </div>
-        <div class="news-item">
-          <time datetime="2026-06">June 2026</time>
-          <p><strong>Amir at ICRA 2026</strong>: Amir gave a keynote on "Brain Circulation: The Diaspora's Role in
-            African Robotics", at the Robotic Systems Designed for Underrepresented Communities event as part of the
-            Community Building Day at IEEE International Conference on Robotics and Automation (ICRA) 2026.</p>
-        </div>
-        <div class="news-item">
-          <time datetime="2026-04">April 2026</time>
-          <p><strong>REBL appeared in Rae Harbird Day</strong>: Shengyang and Michael gave lectures to KS3 students as
-            part of the UCL CS flagship outreach event.</p>
-        </div>
+      <div class="ds-grid robot-grid">
+        <article class="ds-card robot-card">
+          <span class="expand-icon">▾</span>
+          <!-- Dima-card.jpg is the portrait original widened to square on a blurred
+               copy of itself, so the frame fills the card without the crop cutting
+               the tail. Dima.JPG is the untouched photograph. -->
+          <div class="robot-photo">
+            <img src="assets/research/robotic_platforms/Dima-card.jpg"
+              alt="Dima, the tailed manoeuvrability robot, its tail raised above the body" loading="lazy" />
+          </div>
+          <div class="ds-head">
+            <h4>Dima</h4>
+          </div>
+          <p class="ds-sub">The tailed robot that started the line.</p>
+          <div class="extra">
+            <p>Built to test whether a cheetah-like tail can swing a body through a turn faster than legs alone allow.
+              Dima was the platform behind the lab's first result on rapid turning at speed, and its later
+              revision, AeroDima, traded the inertial tail for an aerodynamic one.</p>
+          </div>
+        </article>
+
+        <article class="ds-card robot-card">
+          <span class="expand-icon">▾</span>
+          <div class="robot-photo">
+            <img src="assets/research/robotic_platforms/baleka.jpg" alt="Baleka, the bipedal manoeuvrability robot"
+              loading="lazy" />
+          </div>
+          <div class="ds-head">
+            <h4>Baleka</h4>
+          </div>
+          <p class="ds-sub">A bipedal robot for studying rapid manoeuvrability.</p>
+          <div class="extra">
+            <p>Where Dima asked what a tail is for, Baleka asks what the legs have to do: how a running machine
+              accelerates, brakes and changes direction without falling over. It is the testbed for the control
+              strategies we infer from cheetah motion capture.</p>
+          </div>
+        </article>
+
+        <article class="ds-card robot-card">
+          <span class="expand-icon">▾</span>
+          <div class="robot-photo">
+            <img src="assets/research/robotic_platforms/spaleka.jpg"
+              alt="Spaleka, the bipedal platform with an added spine" loading="lazy" />
+          </div>
+          <div class="ds-head">
+            <h4>Spaleka</h4>
+          </div>
+          <p class="ds-sub">Baleka, with a spine.</p>
+          <div class="extra">
+            <p>A cheetah does not run on a rigid back. Spaleka adds an articulated spine to the Baleka platform, so
+              the contribution of spinal motion to acceleration, braking and turning can be measured directly against
+              the rigid-backed original.</p>
+          </div>
+        </article>
+
+        <article class="ds-card robot-card">
+          <span class="expand-icon">▾</span>
+          <div class="robot-photo">
+            <img src="assets/research/robotic_platforms/kemba.jpg" alt="Kemba, the current cheetah-inspired platform"
+              loading="lazy" />
+          </div>
+          <div class="ds-head">
+            <h4>Kemba</h4>
+          </div>
+          <p class="ds-sub">The current platform in a decade-long line.</p>
+          <div class="extra">
+            <p>Kemba carries forward ten years of cheetah-inspired design from Dima onward, bringing the tail and
+              leg work together on one machine so that the two can finally be studied as a single coupled system.</p>
+          </div>
+        </article>
       </div>
     </section>
 
     <!-- ============= JOIN ============= -->
-    <section id="join" class="section wrap">
+    <section id="join" class="section wrap page">
       <div class="kicker"><span class="dot"></span> Join</div>
-      <h2 class="display-title">Open positions.</h2>
+      <h2 class="display-title">Join the lab.</h2>
       <p style="max-width: 120ch; color: var(--muted); margin: 0 0 22px; line-height:1.65">
         We welcome prospective researchers, biological collaborators, conservation partners and organisations 
         interested in building new tools for understanding animals.
       </p>
 
-      <div class="grid cols-2">
-        <article class="card">
-          <h3>Postdoctoral Researcher</h3>
-          <p>Description of the postdoctoral researcher position.</p>
-          <div class="meta">
-            <span class="tag"><span class="pin"></span>Postdoc</span>
-            <span class="tag"><span class="pin"></span>2 years</span>
-            <span class="tag"><span class="pin"></span>Funded</span>
-          </div>
-        </article>
-        <article class="card">
-          <h3>Research Engineer</h3>
-          <p>Description of the research engineer position.</p>
-          <div class="meta">
-            <span class="tag"><span class="pin"></span>Research Engineer</span>
-            <span class="tag"><span class="pin"></span>2 years</span>
-            <span class="tag"><span class="pin"></span>Funded</span>
-          </div>
-        </article>
+      <div class="vacancy-note">
+        <span class="vacancy-dot" aria-hidden="true"></span>
+        <div>
+          <h3>No open positions at the moment</h3>
+          <p>The lab has no funded postdoctoral or research-engineer vacancies right now. New roles are announced here
+            and on the UCL jobs site. We are still glad to hear from prospective PhD students, visiting researchers and
+            collaborators — get in touch through the <a href="#contact">contact page</a>.</p>
+        </div>
       </div>
 
       <p style="max-width: 120ch; color: var(--muted); margin: 32px 0 14px; line-height:1.65">
@@ -641,7 +763,7 @@
     </section>
 
     <!-- ============= CONTACT ============= -->
-    <section id="contact" class="section wrap">
+    <section id="contact" class="section wrap page">
       <div class="kicker"><span class="dot"></span> Contact</div>
       <h2 class="display-title">Get in touch.</h2>
       <p style="max-width: 90ch; color: var(--muted); margin: 0 0 22px; line-height:1.65">
@@ -755,18 +877,52 @@
   </main>
 
   <footer class="footer wrap">
-    <div class="row">
-      <div class="footer-brand">
-        <strong>REBL · UCL Computer Science</strong>
-        <div class="footer-logos">
-          <span class="logo-lock footer-lock">
-            <img class="lock-day" src="assets/rebl_newLogo_black.png" alt="REBL" />
-            <img class="lock-night" src="assets/newLogo_website.png" alt="REBL" />
-          </span>
-          <img src="assets/uclcs-logo.png" alt="UCL Computer Science" class="uclcs-logo" />
-        </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h2>Navigation</h2>
+        <!-- Keeps the footer-nav class: the router marks the current page here too. -->
+        <ul class="footer-list footer-nav">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#team">Team</a></li>
+          <li><a href="#outputs">Outputs</a></li>
+          <li><a href="#join">Join</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
       </div>
-      <span>© 2026 · Robotics-Enabled Biology Lab · University College London</span>
+
+      <div class="footer-col">
+        <h2>Links</h2>
+        <ul class="footer-list">
+          <li><a href="https://github.com/rebl-ucl">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/amir-patel/">LinkedIn</a></li>
+          <li><a href="https://scholar.google.co.uk/citations?user=RxMigV4AAAAJ&amp;hl=en">Google Scholar</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h2>Address</h2>
+        <p>
+          Department of Computer Science,<br />
+          University College London,<br />
+          One Pool Street, London E20 2AF,<br />
+          United Kingdom
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h2>Email</h2>
+        <p><a href="mailto:amir.patel@ucl.ac.uk">amir.patel@ucl.ac.uk</a></p>
+      </div>
+    </div>
+
+    <div class="footer-base">
+      <span>© 2026 Robotics-Enabled Biology Lab. All rights reserved.</span>
+      <span class="footer-base-links">
+        <a href="https://www.ucl.ac.uk/computer-science/">UCL Computer Science</a>
+        <a href="https://rebl-ucl.github.io">rebl-ucl.github.io</a>
+      </span>
     </div>
   </footer>
 

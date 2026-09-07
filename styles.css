@@ -147,6 +147,20 @@ body{
 /* Layout helpers */
 .wrap{max-width:var(--col); margin:0 auto; padding:0 var(--pad)}
 .section{padding: 78px 0}
+
+/* ===== Pages =====
+   The site is a set of discrete pages inside one document: the nav mounts one
+   section at a time rather than scrolling a single long column. --header-h is
+   measured in script.js so inner pages always clear the fixed bar. */
+.page{ display: none }
+.page.is-active{ display: block }
+.section.page{ padding-top: calc(var(--header-h, 86px) + 44px) }
+.section.page.is-active{ animation: page-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both }
+@keyframes page-in{
+  from{ opacity: 0; transform: translateY(10px) }
+  to{ opacity: 1; transform: none }
+}
+/* The footer runs on every page; on home it sits under the full-height hero. */
 .section h2{
   margin:0 0 16px;
   font-family: var(--sans);
@@ -297,11 +311,6 @@ html[data-theme="night"] .logo-lock .lock-night{ display: block }
 }
 .icon-btn:hover{ background: var(--panel); border-color: var(--stroke2) }
 .icon{ width: 18px; height: 18px }
-
-/* Day shows the moon (switch to night), night shows the sun */
-.theme-btn .icon-sun{ display:none }
-html[data-theme="night"] .theme-btn .icon-sun{ display:block }
-html[data-theme="night"] .theme-btn .icon-moon{ display:none }
 
 .menu-btn{ display:none }
 
@@ -545,10 +554,22 @@ html[data-theme="night"] .theme-btn .icon-moon{ display:none }
   align-items: flex-start;
   min-width: 0;
 }
-.project-card .info{ min-width: 0; flex: 1 }
-.project-card h3{ margin: 0 0 6px }
+.project-card .info{ min-width: 0; flex: 1; display: flex; flex-direction: column }
+.project-card h3{ margin: 0 0 6px; padding-right: 18px }
 .project-card p{ font-size: 13.5px }
 .project-card .meta{ margin-top: 10px }
+/* Same click-to-open behaviour as the people cards. */
+.project-card{
+  cursor: pointer;
+  transition: transform 160ms ease, border-color 160ms ease;
+}
+.project-card:hover{ transform: translateY(-2px); border-color: var(--yellow-3) }
+.project-card.expanded{ transform: translateY(-2px); border-color: var(--yellow-3) }
+.project-card.expanded .thumb{ width: 108px; height: 108px; border-radius: 18px }
+.project-card.expanded .extra{ max-height: 460px; opacity: 1; margin-top: 12px }
+.project-card .extra p{ font-size: 13px; line-height: 1.6 }
+/* A grid of four question-sized cards reads better with even rows. */
+.project-grid{ align-items: start }
 .tag{
   display:inline-flex; align-items:center; gap: 8px;
   border-radius: 999px;
@@ -904,11 +925,47 @@ details.bib pre{
   line-height: 1.55;
 }
 
+/* ---- Research: the statement that opens the page ----
+   Set at hero scale and centred, so it is the first and only thing read before
+   the rule hands over to the section proper. */
+.research-hero{
+  text-align: center;
+  padding: clamp(16px, 5vh, 56px) 0 clamp(26px, 7vh, 68px);
+}
+.section h2.research-statement{
+  margin: 0 auto;
+  font-family: var(--display-condensed);
+  font-weight: 400;
+  text-transform: uppercase;
+  /* The second line is the long one; the vw term keeps it inside the measure on
+     a phone rather than running to both edges. */
+  font-size: clamp(21px, 6.4vw, 76px);
+  letter-spacing: 0.005em;
+  line-height: 1.0;
+}
+/* Two deliberate lines rather than whatever the measure happens to give. */
+.research-statement .line{ display: block }
+.research-lede{
+  margin: clamp(16px, 2.6vh, 28px) auto 0;
+  /* Deliberately uncapped: the sentence is meant to sit on one line under the
+     statement, so the section's own width is the only limit before it wraps. */
+  max-width: none;
+  color: var(--muted);
+  font-size: clamp(15px, 1.15vw, 18px);
+  line-height: 1.6;
+}
+/* Hairline: closes the statement, opens the section. */
+.rule{
+  border: 0;
+  border-top: 1px solid var(--stroke);
+  margin: 0 0 clamp(26px, 5vh, 52px);
+}
+
 /* Research themes diagram. The PNG is transparent, so it sits on the page
    background and works in both day and night. */
 .research-themes{
   margin: 14px auto 4px;
-  max-width: 650px;
+  max-width: 750px;
   padding: 0;
 }
 .research-themes img{ width: 100%; height: auto; display: block }
@@ -927,6 +984,9 @@ details.bib pre{
   color: var(--muted);
 }
 .people-subhead.first{ margin-top: 4px }
+/* A subhead introducing its own heading: the pair travels together, so the
+   heading drops the 64px gap the section rule gives a standalone second h2. */
+.people-subhead + h2.display-title{ margin-top: 0 }
 .people-subhead .dot{
   width: 6px; height: 6px; border-radius: 1px;
   background: var(--muted2);
@@ -1121,6 +1181,11 @@ button.people-subhead{
   line-height: 1.5;
 }
 .person .links{ margin-top: 8px; display:flex; gap: 6px; flex-wrap:wrap }
+/* The single research line the collapsed card keeps; everything else — supervision,
+   degrees, links — lives in .extra and appears on expansion. */
+.person .person-q{ margin-top: 6px; color: var(--text) }
+.person .extra p{ margin-top: 0 }
+.person .extra p + p{ margin-top: 6px }
 .person .links a,
 .pi-info .links a,
 .ds-card .links a{
@@ -1174,6 +1239,7 @@ button.people-subhead{
 .person .expand-icon,
 .pub-card .expand-icon,
 .ds-card .expand-icon,
+.project-card .expand-icon,
 .pi-block .expand-icon{
   position: absolute;
   top: 14px; right: 14px;
@@ -1187,9 +1253,11 @@ button.people-subhead{
 .person.expanded .expand-icon,
 .pub-card.expanded .expand-icon,
 .ds-card.expanded .expand-icon,
+.project-card.expanded .expand-icon,
 .pi-block.expanded .expand-icon{ transform: rotate(180deg); color: var(--yellow); }
 .person .extra,
 .ds-card .extra,
+.project-card .extra,
 .pi-block .extra{
   max-height: 0;
   overflow: hidden;
@@ -1226,29 +1294,144 @@ button.people-subhead{
 .alumni-grid .person .links{ margin-top: 7px }
 .alumni-grid .person .links a{ font-size: 10px; padding: 4px 8px }
 
-/* ===== News ===== */
-.news{ display:grid; gap: 10px }
-.news-item{
-  display:flex; flex-direction:column; align-items:flex-start; gap: 6px;
-  padding: 14px 18px;
+/* ---- Robots & experimental systems: photo-led cards ---- */
+.robot-grid{ grid-template-columns: repeat(4, minmax(0, 1fr)) }
+/* The photo runs to the card edge, so the padding moves onto the copy below it. */
+.robot-card{ padding: 0; overflow: hidden }
+.robot-card > *:not(.robot-photo):not(.expand-icon){ margin-left: 18px; margin-right: 18px }
+.robot-card .ds-head{ margin-top: 14px }
+.robot-card .links{ margin-bottom: 18px }
+.robot-card .extra{ margin-bottom: 0 }
+.robot-card.expanded .extra{ margin-bottom: 18px }
+/* No links row on these cards, so the copy carries the bottom padding itself. */
+.robot-card:not(.expanded) .ds-sub{ margin-bottom: 18px }
+.robot-photo{
+  /* Square, so every card in the row is the same height. A portrait source is
+     shown whole inside it (see .is-uncropped) rather than making the frame taller. */
+  aspect-ratio: 1 / 1;
+  background: #E3DFD0;
+  border-bottom: 1px solid var(--stroke);
+  overflow: hidden;
+}
+.robot-photo img{ width: 100%; height: 100%; object-fit: cover; display: block }
+/* Some subjects run the full height of their frame — Dima's tail is the whole
+   point of the robot — so those are shown whole, on the mat, rather than cropped. */
+.robot-photo.is-uncropped img{ object-fit: contain }
+/* Until the photograph lands, a neutral tile rather than a broken image. */
+.robot-photo.is-empty{
+  background:
+    repeating-linear-gradient(45deg, rgba(23,21,15,0.05) 0 6px, transparent 6px 12px),
+    #E3DFD0;
+}
+.robot-photo.is-empty img{ display: none }
+html[data-theme="night"] .robot-photo{ background: #26251F }
+/* The chevron sits over the photo, which may be a dark image or the pale
+   placeholder tile, so it carries its own backdrop rather than relying on either. */
+.robot-card .expand-icon{
+  top: 10px; right: 10px;
+  width: 22px; height: 22px;
+  display: grid; place-items: center;
+  border-radius: 999px;
+  color: #F6F2E6;
+  background: rgba(23,21,15,0.5);
+  backdrop-filter: blur(4px);
+}
+.robot-card.expanded .expand-icon{ color: var(--accent-yellow) }
+
+/* ===== Join ===== */
+/* Stands in for the vacancy cards while nothing is open. */
+.vacancy-note{
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px 20px;
+  border-radius: var(--radius-lg);
+  border: 1px dashed var(--stroke2);
+  background: var(--panel);
+}
+.vacancy-dot{
+  width: 9px; height: 9px; border-radius: 999px;
+  background: var(--muted2);
+  flex: 0 0 auto;
+  margin-top: 7px;
+  box-shadow: 0 0 0 5px rgba(23,21,15,0.06);
+}
+html[data-theme="night"] .vacancy-dot{ box-shadow: 0 0 0 5px rgba(245,243,236,0.07) }
+.vacancy-note h3{
+  margin: 0 0 6px;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+}
+.vacancy-note p{ margin: 0; color: var(--muted); font-size: 14px; line-height: 1.6; max-width: 88ch }
+.vacancy-note a{
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--stroke2);
+  text-underline-offset: 3px;
+}
+.vacancy-note a:hover{ text-decoration-color: var(--yellow) }
+
+/* ===== News =====
+   A compact feed at the foot of the Team page: date and line in one row, the
+   whole list in a fixed-height scroller so it cannot dominate the page. */
+.news-scroll{
+  /* Sized to about four entries; anything past that scrolls, so the feed can
+     grow without the section growing with it. */
+  max-height: 220px;
+  overflow-y: auto;
+  margin-top: 18px;
+  border: 1px solid var(--stroke);
   border-radius: var(--radius-lg);
   background: var(--panel);
-  border: 1px solid var(--stroke);
   box-shadow: var(--shadow2);
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: var(--stroke2) transparent;
 }
+.news-scroll:focus-visible{ outline: 2px solid var(--yellow-3); outline-offset: 3px }
+.news-scroll::-webkit-scrollbar{ width: 11px }
+.news-scroll::-webkit-scrollbar-track{ background: transparent }
+.news-scroll::-webkit-scrollbar-thumb{
+  background: var(--stroke2);
+  border-radius: 999px;
+  /* Transparent border inset via background-clip keeps the thumb slim. */
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+.news{ margin: 0; padding: 0; list-style: none }
+.news-item{
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 16px;
+  align-items: baseline;
+  padding: 11px 18px;
+  border-bottom: 1px solid var(--stroke);
+}
+.news-item:last-child{ border-bottom: 0 }
 .news-item time{
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 10.5px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted2);
-  flex: 0 0 auto;
-  padding-top: 2px;
+  white-space: nowrap;
 }
 .news-item p{
-  margin:0; color: var(--muted); line-height: 1.55; font-size: 14px;
+  margin: 0;
+  /* Uncapped: each entry runs the full width of the panel. */
+  max-width: none;
+  color: var(--muted);
+  line-height: 1.5;
+  font-size: 13.5px;
 }
-.news-item p strong{ color: var(--text) }
+.news-item p strong{ color: var(--text); font-weight: 700 }
+
+@media (max-width: 560px){
+  /* The date moves above the line rather than squeezing the text column. */
+  .news-item{ grid-template-columns: minmax(0, 1fr); gap: 4px; padding: 12px 16px }
+}
 
 /* ===== Contact ===== */
 .contact-grid{
@@ -1423,42 +1606,74 @@ button.people-subhead{
 }
 .toast.show{ opacity:1; transform: translateX(-50%) translateY(-6px) }
 
-/* ===== Footer ===== */
+/* ===== Footer =====
+   Column panel — navigation, social, address, email — over a rule, with the
+   copyright line beneath it. No lockups here: the mark lives in the header. */
 .footer{
-  padding: 32px 0 48px;
+  padding: 44px 0 40px;
   border-top: 1px solid var(--stroke);
   color: var(--muted);
-  font-size: 12px;
-  font-family: var(--mono);
-  letter-spacing: 0.06em;
+  font-family: var(--sans);
+  font-size: 13.5px;
+  letter-spacing: 0;
+  line-height: 1.6;
 }
-.footer .row{
-  display:flex; flex-wrap:wrap; gap:12px;
-  align-items:center; justify-content:space-between;
+.footer-cols{
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1.5fr 1.2fr;
+  gap: 30px 32px;
+  align-items: start;
 }
-.footer-brand{
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.footer-logos{
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-.footer-lock{ --lock: 86px; opacity: 0.9 }
-.uclcs-logo{
-  height: 36px;
-  width: auto;
-  opacity: 0.85;
-  display: block;
-}
-.footer .row strong{
+.footer-col h2{
+  margin: 0 0 14px;
   color: var(--text);
-  font-family: var(--display);
-  font-size: 14px;
-  letter-spacing: 0.01em;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 14.5px;
+  letter-spacing: 0;
+  line-height: 1.3;
+}
+.footer-list{ margin: 0; padding: 0; list-style: none }
+.footer-list li{ margin: 0 0 9px }
+.footer-col p{ margin: 0; max-width: 34ch }
+.footer-col a{
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+.footer-col a:hover,
+.footer-col a[aria-current="page"]{ color: var(--text) }
+.footer-col a:focus-visible{ outline: 2px solid var(--yellow-3); outline-offset: 3px; border-radius: 4px }
+/* Eight links read better as two short columns than one tall one. */
+.footer-nav{ columns: 2; column-gap: 26px }
+.footer-nav li{ break-inside: avoid }
+
+.footer-base{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 38px;
+  padding-top: 20px;
+  border-top: 1px solid var(--stroke);
+  font-size: 12.5px;
+}
+.footer-base-links{ display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center }
+.footer-base a{
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+.footer-base a:hover{ color: var(--text) }
+.footer-base a:focus-visible{ outline: 2px solid var(--yellow-3); outline-offset: 3px; border-radius: 4px }
+
+@media (max-width: 900px){
+  .footer-cols{ grid-template-columns: 1fr 1fr }
+}
+@media (max-width: 560px){
+  .footer-cols{ grid-template-columns: 1fr; gap: 26px }
+  .footer-base{ justify-content: flex-start }
 }
 
 /* ===== Small screens ===== */
@@ -1472,13 +1687,12 @@ button.people-subhead{
   .brand{ height: 44px }
   .brand-glow{ height: 136px; margin: -42px -36px -50px -29px }
   .brand-ink{ --lock: 136px }
-  .footer-lock{ --lock: 78px }
 }
 
 /* Nav collapses to the menu button once the six links stop fitting */
 @media (max-width: 900px){
   .nav{
-    position:fixed; left: 16px; right: 16px; top: 68px;
+    position:fixed; left: 16px; right: 16px; top: calc(var(--header-h, 86px) + 6px);
     padding: 12px;
     border-radius: 16px;
     background: rgba(244,240,229,0.98);
@@ -1519,8 +1733,12 @@ button.people-subhead{
   .ds-card--media.expanded .ds-media-row{ position: static }
   .ds-card--media.expanded .ds-media figure{ aspect-ratio: 16 / 9; height: auto }
   .wrap{ padding: 0 16px }
+  /* .wrap's padding shorthand lands after .header-inner's, so the bar has to
+     restate its own vertical padding here or it collapses to the logo height. */
+  .header-inner{ padding: 10px 16px }
   .section{ padding: 56px 0 }
   .grid.cols-3, .grid.cols-2{ grid-template-columns: 1fr }
+  .section.page{ padding-top: calc(var(--header-h, 86px) + 30px) }
   .people-grid{ grid-template-columns: 1fr; }
   .alumni-grid{ grid-template-columns: 1fr; }
   .pub-featured{ grid-template-columns: 1fr; }

@@ -9,28 +9,6 @@
 
   const root = document.documentElement;
 
-  // ---------- Theme (day / night) ----------
-  const themeBtn = $("#themeBtn");
-  function applyTheme(mode) {
-    if (mode === "night") root.setAttribute("data-theme", "night");
-    else root.removeAttribute("data-theme");
-    localStorage.setItem("rebl-theme", mode);
-    if (themeBtn) {
-      const label = mode === "night" ? "Switch to day mode" : "Switch to night mode";
-      themeBtn.setAttribute("aria-label", label);
-      themeBtn.setAttribute("title", label);
-    }
-  }
-  const savedTheme = localStorage.getItem("rebl-theme");
-  applyTheme(
-    savedTheme === "night" || savedTheme === "dark" ? "night" :
-    savedTheme === "day" || savedTheme === "light" ? "day" :
-    window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "night" : "day"
-  );
-  themeBtn && themeBtn.addEventListener("click", () => {
-    applyTheme(root.getAttribute("data-theme") === "night" ? "day" : "night");
-  });
-
   // ---------- Mobile menu ----------
   const menuBtn = $("#menuBtn");
   const nav = $("#nav");
@@ -44,38 +22,6 @@
       menuBtn && menuBtn.setAttribute("aria-expanded", "false");
     })
   );
-
-  // ---------- Smooth scroll ----------
-  $$(".nav a[href^='#'], a.btn[href^='#'], a.brand[href^='#']").forEach((a) => {
-    a.addEventListener("click", (e) => {
-      const id = a.getAttribute("href");
-      if (!id || id === "#") return;
-      const target = document.querySelector(id);
-      if (!target) return;
-      e.preventDefault();
-      window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 70, behavior: "smooth" });
-      history.replaceState(null, "", id);
-    });
-  });
-
-  // ---------- Active section highlight ----------
-  const sections = $$("main section[id]");
-  const navLinks = $$("#nav a[href^='#']");
-  const linkById = new Map(navLinks.map((a) => [a.getAttribute("href").slice(1), a]));
-  const observer = new IntersectionObserver(
-    (entries) => {
-      const visible = entries
-        .filter((e) => e.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (!visible) return;
-      const id = visible.target.getAttribute("id");
-      navLinks.forEach((a) => a.removeAttribute("aria-current"));
-      const link = linkById.get(id);
-      link && link.setAttribute("aria-current", "page");
-    },
-    { root: null, threshold: [0.1, 0.25, 0.5, 0.75] }
-  );
-  sections.forEach((s) => observer.observe(s));
 
   // ---------- Toast ----------
   const toast = $("#toast");
@@ -188,24 +134,98 @@
   }
 
   // ---------- Header over hero ----------
-  // Transparent white-on-photo bar while the hero fills the screen; solid bar after.
+  // Transparent white-on-photo bar while the hero fills the screen; solid bar
+  // everywhere else. Off the home page the hero is unmounted, so its rect is
+  // empty and the bar is solid without any extra bookkeeping.
   const header = $(".header");
   const heroSec = $(".hero");
+  let setHeaderMode = () => {};
   if (header && heroSec) {
-    const setHeaderMode = () => {
-      const overHero =
-        heroSec.getBoundingClientRect().bottom > header.offsetHeight + 4;
+    setHeaderMode = () => {
+      const rect = heroSec.getBoundingClientRect();
+      // Transparent only while resting at the top of the hero. Once the page
+      // scrolls — which on home it now does, to reach the footer — the hero
+      // copy slides up behind the bar, and a transparent bar would let the
+      // headline collide with the lockup instead of passing under it.
+      const overHero = rect.bottom > header.offsetHeight + 4 && rect.top > -4;
       header.classList.toggle("is-over-hero", overHero);
     };
+    // Inner pages start below the fixed bar; the mobile nav panel hangs off it too.
+    const setHeaderHeight = () =>
+      root.style.setProperty("--header-h", header.offsetHeight + "px");
+    setHeaderHeight();
     setHeaderMode();
     window.addEventListener("scroll", setHeaderMode, { passive: true });
-    window.addEventListener("resize", setHeaderMode, { passive: true });
+    window.addEventListener("resize", () => {
+      setHeaderHeight();
+      setHeaderMode();
+    }, { passive: true });
   }
+
+  // ---------- Page router ----------
+  // The nav swaps which section is mounted instead of scrolling one long page.
+  // The hash is the address, so deep links and the back button both work.
+  const pages = $$("main > section[id]");
+  const pageIds = new Set(pages.map((p) => p.id));
+  // The footer carries News and Home, so it takes the current-page mark too.
+  const navLinks = $$(".nav a[href^='#'], .footer-nav a[href^='#']");
+  const HOME = "home";
+  // Links from before People and Publications were renamed still land correctly.
+  const ALIASES = { people: "team", publications: "outputs", news: "team" };
+
+  const pageFromHash = () => {
+    const raw = (location.hash || "").slice(1);
+    const id = ALIASES[raw] || raw;
+    return pageIds.has(id) ? id : HOME;
+  };
+
+  function showPage(id) {
+    const target = pageIds.has(id) ? id : HOME;
+    // Keep the address honest after an alias or an unknown hash.
+    if (location.hash && location.hash !== "#" + target) {
+      history.replaceState(null, "", "#" + target);
+    }
+    pages.forEach((p) => p.classList.toggle("is-active", p.id === target));
+    navLinks.forEach((a) => {
+      if (a.getAttribute("href") === "#" + target) a.setAttribute("aria-current", "page");
+      else a.removeAttribute("aria-current");
+    });
+    // Kept as a styling hook for anything that needs to know the hero is up.
+    document.body.classList.toggle("on-home", target === HOME);
+    window.scrollTo(0, 0);
+    setHeaderMode();
+  }
+
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest("a[href^='#']");
+    if (!a) return;
+    const href = a.getAttribute("href");
+    // Placeholder links (the thesis PDFs) must not fall through to the router,
+    // which would read the empty hash as "go home".
+    if (href === "#") {
+      e.preventDefault();
+      return;
+    }
+    const id = href.slice(1);
+    if (!pageIds.has(id)) return;
+    e.preventDefault();
+    if (nav) nav.classList.remove("open");
+    menuBtn && menuBtn.setAttribute("aria-expanded", "false");
+    if (pageFromHash() === id) {
+      window.scrollTo(0, 0);
+      return;
+    }
+    // hashchange does the actual swap, so history stays in step.
+    location.hash = "#" + id;
+  });
+
+  window.addEventListener("hashchange", () => showPage(pageFromHash()));
+  showPage(pageFromHash());
 
   // ---------- Featured publication thumbnails ----------
   // Artwork is dropped into assets/pubs/ over time; show a neutral tile for
   // any file that is not there yet instead of a broken image.
-  $$(".pub-card .thumb img, .project-card .thumb img").forEach((img) => {
+  $$(".pub-card .thumb img, .project-card .thumb img, .robot-photo img").forEach((img) => {
     const markEmpty = () => img.parentElement.classList.add("is-empty");
     if (img.complete && img.naturalWidth === 0) markEmpty();
     else img.addEventListener("error", markEmpty, { once: true });
@@ -308,9 +328,9 @@
     });
   }
   // ---------- Card expand/collapse ----------
-  // People, featured papers, datasets and tools all share the behaviour:
-  // one card open at a time within its own grid.
-  const EXPANDABLE = ".person, .pub-card, .ds-card, .pi-block";
+  // People, projects, featured papers, datasets and tools all share the
+  // behaviour: one card open at a time within its own grid.
+  const EXPANDABLE = ".person, .pub-card, .ds-card, .project-card, .pi-block";
   $$(EXPANDABLE).forEach((card) => {
     card.addEventListener("click", (e) => {
       if (e.target.closest("a")) return;
@@ -349,7 +369,11 @@
   if (alumniToggle && alumniPanel) {
     const isOpen = () => alumniPanel.classList.contains("open");
     const syncHeight = () => {
-      if (isOpen()) alumniPanel.style.maxHeight = alumniPanel.scrollHeight + "px";
+      // offsetParent is null while the People page is unmounted, when every
+      // height measures 0 — re-measuring then would collapse an open panel.
+      if (isOpen() && alumniPanel.offsetParent) {
+        alumniPanel.style.maxHeight = alumniPanel.scrollHeight + "px";
+      }
     };
     alumniToggle.addEventListener("click", () => {
       const open = !isOpen();
