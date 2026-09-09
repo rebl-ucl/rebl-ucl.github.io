@@ -93,9 +93,48 @@
         <p class="research-lede">
           REBL combines robotics, AI, biomechanics and field biology to uncover how animals move, sense and survive.
         </p>
+
+        <figure class="research-whatwedo">
+          <img src="assets/research/REBL_whatWeDo.png" loading="lazy"
+            alt="What we do at REBL: robotics, AI, biomechanics and field biology brought together to study animal movement, sensing and survival." />
+        </figure>
       </div>
 
       <hr class="rule" />
+
+      <h2 class="display-title">How we do research.</h2>
+      <p style="max-width: 130ch; color: var(--muted); margin: 0 0 22px; line-height:1.65">
+        We work in a loop. Measurements of real animals become models, models become predictions we can test, and
+        robots put those predictions back into the physical world — where the next round of measurements begins.
+        Six capabilities carry the work around that loop.
+      </p>
+
+      <div class="grid cols-3 research-loop">
+        <div class="loop-item">
+          <h3>Sensing</h3>
+          <p>Cameras, thermal and inertial sensors capture animals in the wild without touching them.</p>
+        </div>
+        <div class="loop-item">
+          <h3>Estimation</h3>
+          <p>Computer vision and probabilistic filters turn noisy field recordings into 3D motion.</p>
+        </div>
+        <div class="loop-item">
+          <h3>Control</h3>
+          <p>Feedback laws that keep a body upright, on course and stable at speed.</p>
+        </div>
+        <div class="loop-item">
+          <h3>Dynamics</h3>
+          <p>Mechanical models of skeletons, muscles and contact that explain the forces behind a stride.</p>
+        </div>
+        <div class="loop-item">
+          <h3>Optimisation</h3>
+          <p>Trajectory optimisation and learning ask why an animal moves this way and not another.</p>
+        </div>
+        <div class="loop-item">
+          <h3>Robots</h3>
+          <p>Legged platforms test the answers in hardware, where physics has the final say.</p>
+        </div>
+      </div>
 
       <figure class="research-themes">
         <img src="assets/research/REBL_howWeDoResearch_blackline_4K.png" loading="lazy"
@@ -556,16 +595,19 @@
                the tail. Dima.JPG is the untouched photograph. -->
           <div class="robot-photo">
             <img src="assets/research/robotic_platforms/Dima-card.jpg"
-              alt="Dima, the tailed manoeuvrability robot, its tail raised above the body" loading="lazy" />
+              alt="Dima, the wheeled tailed robot, its actuated tail raised above the chassis" loading="lazy" />
           </div>
           <div class="ds-head">
             <h4>Dima</h4>
           </div>
           <p class="ds-sub">The tailed robot that started the line.</p>
           <div class="extra">
-            <p>Built to test whether a cheetah-like tail can swing a body through a turn faster than legs alone allow.
-              Dima was the platform behind the lab's first result on rapid turning at speed, and its later
-              revision, AeroDima, traded the inertial tail for an aerodynamic one.</p>
+            <p>A fast wheeled platform, deliberately built top-heavy enough to topple, carrying a single actuated
+              tail. It tested the hypothesis drawn from pursuit footage: that a cheetah swings its tail to counter
+              the rolling moment of a hard turn. Through the same 30&deg; turning step Dima flipped at about
+              3.1&nbsp;m/s without the tail and held the turn at 7.5&nbsp;m/s with it. Later revisions added a second
+              tail degree of freedom to reproduce the cheetah's conical tail motion, and AeroDima replaced the heavy
+              inertial tail with a light, drag-based aerodynamic one.</p>
           </div>
         </article>
 
@@ -580,42 +622,55 @@
           </div>
           <p class="ds-sub">A bipedal robot for studying rapid manoeuvrability.</p>
           <div class="extra">
-            <p>Where Dima asked what a tail is for, Baleka asks what the legs have to do: how a running machine
-              accelerates, brakes and changes direction without falling over. It is the testbed for the control
-              strategies we infer from cheetah motion capture.</p>
+            <p>Where Dima asked what a tail is for, Baleka asks what the legs have to do. It is a 14&nbsp;kg planar
+              biped on quasi-direct-drive five-bar legs, its geometry chosen by trajectory optimisation and built for
+              exactly the transient manoeuvres robotics usually designs around &mdash; sprinting from standstill and
+              braking hard to a stop, rather than holding a steady gait. Hopping on both legs it reaches a vertical
+              agility of 1.86&nbsp;m/s; on a single leg it still exceeds the human figure of 0.89&nbsp;m/s.</p>
           </div>
         </article>
 
         <article class="ds-card robot-card">
           <span class="expand-icon">▾</span>
           <div class="robot-photo">
-            <img src="assets/research/robotic_platforms/spaleka.jpg"
-              alt="Spaleka, the bipedal platform with an added spine" loading="lazy" />
-          </div>
-          <div class="ds-head">
-            <h4>Spaleka</h4>
-          </div>
-          <p class="ds-sub">Baleka, with a spine.</p>
-          <div class="extra">
-            <p>A cheetah does not run on a rigid back. Spaleka adds an articulated spine to the Baleka platform, so
-              the contribution of spinal motion to acceleration, braking and turning can be measured directly against
-              the rigid-backed original.</p>
-          </div>
-        </article>
-
-        <article class="ds-card robot-card">
-          <span class="expand-icon">▾</span>
-          <div class="robot-photo">
-            <img src="assets/research/robotic_platforms/kemba.jpg" alt="Kemba, the current cheetah-inspired platform"
-              loading="lazy" />
+            <img src="assets/research/robotic_platforms/kemba.jpg"
+              alt="Kemba, the hybrid pneumatic-electric quadruped, on its boom" loading="lazy" />
           </div>
           <div class="ds-head">
             <h4>Kemba</h4>
           </div>
-          <p class="ds-sub">The current platform in a decade-long line.</p>
+          <p class="ds-sub">A hybrid quadruped, and our platform for the cheetah's spine.</p>
           <div class="extra">
-            <p>Kemba carries forward ten years of cheetah-inspired design from Dima onward, bringing the tail and
-              leg work together on one machine so that the two can finally be studied as a single coupled system.</p>
+            <p>Kemba splits its actuation the way the animal data suggested it should: pneumatic cylinders at the
+              knees for explosive push-off, electric motors at the hips for fine control. The split follows from a
+              decade of watching cheetahs accelerate &mdash; they do not delicately modulate foot force so much as
+              push off as hard as they can. Driven by trajectory optimisation that models the pneumatics themselves,
+              it jumps roughly 2.2 times its own leg length.</p>
+            <p>It is now the platform for our work on spine morphology. Comparing a rigid back against revolute
+              (bending) and prismatic (translational) spines under trajectory optimisation, the translational spine
+              comes out ahead: it lengthens the stride without costing stride frequency, aligns the ground reaction
+              force better and stores energy along its axis. Across a full acceleration-and-braking trajectory it is
+              the optimal morphology with about 78.8% probability, and its margin is widest in braking. Modelling
+              that prediction on Kemba, with its real actuator torque, velocity and piston-force limits in the loop,
+              the translational spine holds its advantage.</p>
+          </div>
+        </article>
+
+        <article class="ds-card robot-card">
+          <span class="expand-icon">▾</span>
+          <div class="robot-photo">
+            <img src="assets/research/robotic_platforms/spaleka.png"
+              alt="Spaleka, a quadruped built on Baleka's legs with an articulated spine" loading="lazy" />
+          </div>
+          <div class="ds-head">
+            <h4>Spaleka</h4>
+          </div>
+          <p class="ds-sub">Baleka's legs, joined by a spine.</p>
+          <div class="extra">
+            <p>A cheetah does not run on a rigid back. Spaleka is the newest platform in the line and the one
+              built to settle the spine question in hardware: Baleka's leg design carried into a quadruped, with an
+              articulated spine joining the front and rear bodies. It lets the translational-spine result be measured
+              on a real machine, against a rigid-backed baseline, rather than inferred from optimisation alone.</p>
           </div>
         </article>
       </div>

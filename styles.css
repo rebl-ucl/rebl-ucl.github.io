@@ -954,11 +954,45 @@ details.bib pre{
   font-size: clamp(15px, 1.15vw, 18px);
   line-height: 1.6;
 }
+/* "What we do" image, sitting under the lede and above the hairline. Same
+   transparent-PNG treatment as the themes diagram, so it works day and night. */
+.research-whatwedo{
+  margin: clamp(20px, 3.4vh, 38px) auto 0;
+  max-width: 900px;
+  padding: 0;
+}
+.research-whatwedo img{ width: 100%; height: auto; display: block }
+
 /* Hairline: closes the statement, opens the section. */
 .rule{
   border: 0;
   border-top: 1px solid var(--stroke);
   margin: 0 0 clamp(26px, 5vh, 52px);
+}
+
+/* The six capabilities, sitting above the themes diagram: label plus one line,
+   no card chrome, so the diagram below stays the loudest thing on the page. */
+.research-loop{
+  gap: 18px 28px;
+  margin: 0 0 clamp(20px, 4vh, 40px);
+}
+.loop-item{
+  border-top: 1px solid var(--stroke);
+  padding-top: 12px;
+}
+.loop-item h3{
+  margin: 0 0 6px;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+.loop-item p{
+  margin: 0;
+  color: var(--muted);
+  font-size: 14.5px;
+  line-height: 1.6;
 }
 
 /* Research themes diagram. The PNG is transparent, so it sits on the page
