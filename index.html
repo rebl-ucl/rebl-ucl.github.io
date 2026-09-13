@@ -11,6 +11,20 @@
   <link rel="stylesheet" href="styles.css" />
   <script defer src="publications.js"></script>
   <script defer src="script.js"></script>
+
+  <!-- Paint the right ground before the first frame. Deep-linking to a page that
+       runs on the near-black ground would otherwise flash cream while the
+       deferred router boots. The list is mirrored in script.js (DARK_PAGES). -->
+  <script>
+    (function () {
+      var aliases = { people: "team", publications: "outputs", news: "team" };
+      var raw = (location.hash || "").slice(1);
+      var page = aliases[raw] || raw;
+      document.documentElement.setAttribute(
+        "data-theme", page === "research" ? "night" : "day"
+      );
+    })();
+  </script>
 </head>
 
 <body>
@@ -137,20 +151,26 @@
       </div>
 
       <figure class="research-themes">
-        <img src="assets/research/REBL_howWeDoResearch_blackline_4K.png" loading="lazy"
+        <!-- The white-line cut of the diagram: the blackline_4K file is the same
+             artwork drawn in black, for a light ground. -->
+        <img src="assets/research/REBL_howWeDoResearch_nobg.png" loading="lazy"
           alt="The lab's six research themes arranged around a running cheetah: multimodal sensing, computer vision and state estimation feed measurements in; mechanical modelling, optimisation and control, and physical robots translate them back out." />
       </figure>
 
     </section>
 
     <!-- ============= PROJECTS ============= -->
-    <section id="projects" class="section wrap page">
-      <div class="kicker"><span class="dot"></span> Projects</div>
-      <h2 class="display-title">What we are working on.</h2>
-      <p style="max-width: 130ch; color: var(--muted); margin: 0 0 22px; line-height:1.65">
-        Our projects combine field observations, computational models and physical experiments to answer 
-        specific questions about animals and create new technologies.
-      </p>
+    <section id="projects" class="section wrap page has-intro">
+      <div class="page-intro">
+        <div class="page-intro-inner">
+          <div class="kicker"><span class="dot"></span> Projects</div>
+          <h2 class="display-title">What we are working on.</h2>
+          <p style="max-width: 130ch; margin: 0; line-height:1.65">
+            Our projects combine field observations, computational models and physical experiments to answer
+            specific questions about animals and create new technologies.
+          </p>
+        </div>
+      </div>
 
       <div class="grid cols-2 project-grid">
         <article class="card project-card">
@@ -298,7 +318,7 @@
                 BEng: Harbin Institute of Technology.
               </p>
               <div class="links"><a href="https://shengyangzhuang.github.io/">Homepage</a>
-                <!-- <a href="https://profiles.ucl.ac.uk/105497-shengyang-zhuang">UCL profile</a> -->
+                <a href="https://profiles.ucl.ac.uk/105497-shengyang-zhuang">UCL profile</a>
                 <a href="https://www.linkedin.com/in/shengyang-zhuang/">LinkedIn</a></div>
             </div>
           </div>
@@ -334,8 +354,12 @@
             <p class="person-q">Robust high-speed animal motion capture with solid-state LiDAR.</p>
             <div class="extra">
               <p>Co-supervised with Prof. Dimitrios Kanoulas.</p>
-              <p>MSc: Imperial College London.</p>
-              <div class="links"><a href="https://www.linkedin.com/in/jiaye-huang-37a490334/">LinkedIn</a></div>
+              <p>MSc: Imperial College London.<br>
+                 BSc: Durham University.
+              </p>
+              <div class="links">
+                <a href="https://profiles.ucl.ac.uk/107517-jiaye-huang">UCL profile</a>
+                <a href="https://www.linkedin.com/in/jiaye-huang-37a490334/">LinkedIn</a></div>
             </div>
           </div>
         </div>
@@ -677,19 +701,24 @@
     </section>
 
     <!-- ============= JOIN ============= -->
-    <section id="join" class="section wrap page">
-      <div class="kicker"><span class="dot"></span> Join</div>
-      <h2 class="display-title">Join the lab.</h2>
-      <p style="max-width: 120ch; color: var(--muted); margin: 0 0 22px; line-height:1.65">
-        We welcome prospective researchers, biological collaborators, conservation partners and organisations 
-        interested in building new tools for understanding animals.
-      </p>
+    <section id="join" class="section wrap page has-intro">
+      <!-- Swap --intro-photo for the field image when it lands; nothing else changes. -->
+      <div class="page-intro has-photo" style="--intro-photo: url('assets/people/rebl.jpg')">
+        <div class="page-intro-inner">
+          <div class="kicker"><span class="dot"></span> Join</div>
+          <h2 class="display-title">Join the lab.</h2>
+          <p style="max-width: 120ch; margin: 0; line-height:1.65">
+            We welcome prospective researchers, biological collaborators, conservation partners and organisations
+            interested in building new tools for understanding animals.
+          </p>
+        </div>
+      </div>
 
       <div class="vacancy-note">
         <span class="vacancy-dot" aria-hidden="true"></span>
         <div>
           <h3>No open positions at the moment</h3>
-          <p>The lab has no funded postdoctoral or research-engineer vacancies right now. New roles are announced here
+          <p>The lab has no vacancies right now. New roles are announced here
             and on the UCL jobs site. We are still glad to hear from prospective PhD students, visiting researchers and
             collaborators — get in touch through the <a href="#contact">contact page</a>.</p>
         </div>
@@ -818,12 +847,17 @@
     </section>
 
     <!-- ============= CONTACT ============= -->
-    <section id="contact" class="section wrap page">
-      <div class="kicker"><span class="dot"></span> Contact</div>
-      <h2 class="display-title">Get in touch.</h2>
-      <p style="max-width: 90ch; color: var(--muted); margin: 0 0 22px; line-height:1.65">
-        Bring robotics and biology into the same room.
-      </p>
+    <section id="contact" class="section wrap page has-intro">
+      <!-- Swap --intro-photo for the field image when it lands; nothing else changes. -->
+      <div class="page-intro has-photo" style="--intro-photo: url('assets/people/rebl-2.jpg')">
+        <div class="page-intro-inner">
+          <div class="kicker"><span class="dot"></span> Contact</div>
+          <h2 class="display-title">Get in touch.</h2>
+          <p style="max-width: 90ch; margin: 0; line-height:1.65">
+            Bring robotics and biology into the same room.
+          </p>
+        </div>
+      </div>
       <div class="contact-grid" style="margin-top: 18px">
         <article class="card">
           <h3>Lab address</h3>

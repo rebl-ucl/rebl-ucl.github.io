@@ -133,22 +133,30 @@
     applyFilters();
   }
 
-  // ---------- Header over hero ----------
-  // Transparent white-on-photo bar while the hero fills the screen; solid bar
-  // everywhere else. Off the home page the hero is unmounted, so its rect is
-  // empty and the bar is solid without any extra bookkeeping.
+  // ---------- Header over the page's opening band ----------
+  // Two kinds of band open a page: the hero photograph on home, and the
+  // near-black intro on Projects, Join and Contact. Both want the same bar —
+  // no fill, white type — while they are still under it, and the solid warm
+  // bar once they have scrolled away. Pages without either (Research runs on
+  // the dark ground the whole way down, Team and Outputs on the warm one)
+  // find no band and keep the solid bar throughout.
   const header = $(".header");
-  const heroSec = $(".hero");
   let setHeaderMode = () => {};
-  if (header && heroSec) {
+  if (header) {
     setHeaderMode = () => {
-      const rect = heroSec.getBoundingClientRect();
-      // Transparent only while resting at the top of the hero. Once the page
-      // scrolls — which on home it now does, to reach the footer — the hero
-      // copy slides up behind the bar, and a transparent bar would let the
-      // headline collide with the lockup instead of passing under it.
-      const overHero = rect.bottom > header.offsetHeight + 4 && rect.top > -4;
-      header.classList.toggle("is-over-hero", overHero);
+      const hero = $(".hero.is-active");
+      const band = hero || $(".page.is-active .page-intro");
+      let overBand = false;
+      if (band) {
+        const rect = band.getBoundingClientRect();
+        // Transparent only while resting at the top of the band. Once the page
+        // scrolls — which on home it now does, to reach the footer — the hero
+        // copy slides up behind the bar, and a transparent bar would let the
+        // headline collide with the lockup instead of passing under it.
+        overBand = rect.bottom > header.offsetHeight + 4 && rect.top > -4;
+      }
+      header.classList.toggle("is-over-hero", overBand && !!hero);
+      header.classList.toggle("is-over-dark", overBand && !hero);
     };
     // Inner pages start below the fixed bar; the mobile nav panel hangs off it too.
     const setHeaderHeight = () =>
@@ -172,6 +180,11 @@
   const HOME = "home";
   // Links from before People and Publications were renamed still land correctly.
   const ALIASES = { people: "team", publications: "outputs", news: "team" };
+  // Pages that run on the near-black ground from top to bottom. Projects, Join
+  // and Contact stay on the warm ground and open on a dark .page-intro band
+  // instead, which is styling, not a theme. Mirrored by the boot script in the
+  // document head so a deep link paints the right ground on the first frame.
+  const DARK_PAGES = new Set(["research"]);
 
   const pageFromHash = () => {
     const raw = (location.hash || "").slice(1);
@@ -190,6 +203,7 @@
       if (a.getAttribute("href") === "#" + target) a.setAttribute("aria-current", "page");
       else a.removeAttribute("aria-current");
     });
+    root.setAttribute("data-theme", DARK_PAGES.has(target) ? "night" : "day");
     // Kept as a styling hook for anything that needs to know the hero is up.
     document.body.classList.toggle("on-home", target === HOME);
     window.scrollTo(0, 0);

@@ -32,8 +32,19 @@
   --yellow-3: #211C10;
   --ink:      #F6F2E6; /* text on the dark accent */
 
-  /* REBL brand yellow — hero accent and logo mark */
+  /* REBL brand marks — the three accents the diagrams are drawn in. Kept as
+     tokens so the page and the artwork stay on the same three colours. */
   --accent-yellow: #F2D64B;
+  --accent-blue:   #21b1ff;
+  --accent-pink:   #ff218c;
+
+  /* The two grounds, always available under both themes. Dark bands on an
+     otherwise light page (Projects, Join, Contact) read them directly. */
+  --ground-dark:  #0B0B0A;
+  --ground-dark2: #121210;
+  --ground-warm:  #F2EEE3;
+  --on-dark:      #F5F3EC;
+  --on-dark-muted: rgba(245,243,236,0.66);
 
   --good: #34d399;
   --warn: #fbbf24;
@@ -66,8 +77,8 @@
 
 /* ===== Night mode — warm near-black, white pills (reference dark variant) ===== */
 html[data-theme="night"]{
-  --bg: #121210;
-  --bg2: #1A1A17;
+  --bg: #0B0B0A;
+  --bg2: #121210;
   --panel: rgba(245,243,236,0.05);
   --panel2: rgba(245,243,236,0.09);
   --stroke: rgba(245,243,236,0.14);
@@ -85,10 +96,15 @@ html[data-theme="night"]{
   --shadow: 0 18px 44px rgba(0,0,0,0.50);
   --shadow2: 0 8px 22px rgba(0,0,0,0.40);
 }
-html[data-theme="night"] .header{ background: rgba(18,18,16,0.88) }
+html[data-theme="night"] .header{ background: rgba(11,11,10,0.88) }
 /* Outranks the night bar colour so the over-hero state stays transparent */
 html[data-theme="night"] .header.is-over-hero{ background: transparent; backdrop-filter: none }
-html[data-theme="night"] .kicker .dot{ box-shadow: 0 0 0 5px rgba(245,243,236,0.10) }
+/* The kicker dot is the one place the brand yellow shows on a dark ground —
+   matched to the dot inside .page-intro so every dark opening reads the same. */
+html[data-theme="night"] .kicker .dot{
+  background: var(--accent-yellow);
+  box-shadow: 0 0 0 5px rgba(242,214,75,0.14);
+}
 html[data-theme="night"] .card::after{
   background: radial-gradient(420px 240px at 20% 10%, rgba(245,243,236,0.07), transparent 62%);
 }
@@ -160,6 +176,90 @@ body{
   from{ opacity: 0; transform: translateY(10px) }
   to{ opacity: 1; transform: none }
 }
+
+/* ===== Dark opening band =====
+   Projects, Join and Contact open on the near-black ground and then hand over
+   to the warm page for the cards, the form and the contact details. The band
+   is full-bleed, so the section drops its own top padding and the band carries
+   the clearance for the fixed bar instead. */
+.section.page.has-intro{ padding-top: 0 }
+
+.page-intro{
+  /* Out of the column and across the viewport. body has overflow-x:hidden, so
+     the 100vw overshoot beside a scrollbar never becomes a horizontal scroll. */
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+  position: relative;
+  isolation: isolate;
+  background: var(--ground-dark);
+  color: var(--on-dark);
+  padding: calc(var(--header-h, 86px) + clamp(48px, 8vh, 92px)) 0 clamp(48px, 8vh, 92px);
+  margin-bottom: clamp(40px, 6vh, 72px);
+}
+/* The column, restored inside the full-bleed band. */
+.page-intro-inner{
+  max-width: var(--col);
+  margin: 0 auto;
+  padding: 0 var(--pad);
+  position: relative;
+  z-index: 1;
+}
+/* Type on the band reads off the dark tokens rather than the page's ink ones. */
+.page-intro .kicker{ color: var(--on-dark-muted) }
+.page-intro .kicker .dot{
+  background: var(--accent-yellow);
+  box-shadow: 0 0 0 5px rgba(242,214,75,0.14);
+}
+.page-intro h2,
+.page-intro .display-title{ color: var(--on-dark) }
+.page-intro p{ color: var(--on-dark-muted) }
+.page-intro a{ color: var(--on-dark) }
+.page-intro strong{ color: var(--on-dark) }
+
+/* --- Photo variant ---
+   Join and Contact open over a field/team photograph. Swap the image by
+   changing --intro-photo on the band; the scrim keeps the type legible
+   whatever the picture underneath is doing. */
+.page-intro.has-photo::before{
+  content: "";
+  position: absolute; inset: 0;
+  background-image: var(--intro-photo);
+  background-size: cover;
+  background-position: center 38%;
+  /* Greyscale ties the photo to the cheetah hero and stops it competing with
+     the yellow/blue/pink the diagrams are drawn in. */
+  filter: grayscale(1) contrast(1.05);
+  opacity: 0.42;
+  z-index: -2;
+}
+.page-intro.has-photo::after{
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(11,11,10,0.92), rgba(11,11,10,0.55) 45%, rgba(11,11,10,0.94)),
+    linear-gradient(to right, rgba(11,11,10,0.88), rgba(11,11,10,0.25) 62%);
+  z-index: -1;
+}
+
+/* --- Header over a dark band ---
+   Same idea as the over-hero bar: no fill while the band is under it, white
+   type, and the white-on-dark lockup. Once the band scrolls away the bar
+   returns to the solid warm one. */
+.header.is-over-dark{
+  background: transparent;
+  backdrop-filter: none;
+}
+.header.is-over-dark .logo-lock .lock-day{ display: none }
+.header.is-over-dark .logo-lock .lock-night{ display: block }
+.header.is-over-dark .nav a{ color: var(--on-dark); opacity: 0.78 }
+.header.is-over-dark .nav a:hover,
+.header.is-over-dark .nav a[aria-current="page"]{ color: var(--on-dark); opacity: 1 }
+.header.is-over-dark .icon-btn{
+  color: var(--on-dark);
+  border-color: rgba(245,243,236,0.34);
+}
+.header.is-over-dark .icon-btn:hover{ background: rgba(245,243,236,0.14) }
+
 /* The footer runs on every page; on home it sits under the full-height hero. */
 .section h2{
   margin:0 0 16px;
@@ -178,8 +278,8 @@ body{
   letter-spacing: 0.005em;
   line-height: 0.94;
 }
-.hl-robotics{ color: #21b1ff }
-.hl-biology{ color: #ff218c }
+.hl-robotics{ color: var(--accent-blue) }
+.hl-biology{ color: var(--accent-pink) }
 
 .section h2 ~ h2{ margin-top: 64px }
 
@@ -1736,11 +1836,14 @@ html[data-theme="night"] .vacancy-dot{ box-shadow: 0 0 0 5px rgba(245,243,236,0.
     gap: 4px;
     white-space: normal;
   }
-  /* The dropdown is a cream panel even over the hero, so keep its links dark */
+  /* The dropdown is a cream panel even over the hero or a dark opening band,
+     so keep its links dark in both. */
   .nav a,
-  .header.is-over-hero .nav a{ padding: 12px 14px; color: var(--text); opacity: 0.8 }
+  .header.is-over-hero .nav a,
+  .header.is-over-dark .nav a{ padding: 12px 14px; color: var(--text); opacity: 0.8 }
   .nav a:hover,
-  .header.is-over-hero .nav a:hover{ color: var(--text); opacity: 1 }
+  .header.is-over-hero .nav a:hover,
+  .header.is-over-dark .nav a:hover{ color: var(--text); opacity: 1 }
   .nav.open{ display:flex }
   .menu-btn{ display:grid }
   html[data-theme="night"] .nav{ background: rgba(24,24,21,0.98) }
