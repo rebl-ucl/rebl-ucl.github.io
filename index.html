@@ -114,8 +114,10 @@
         </figure>
       </div>
 
-      <hr class="rule" />
-
+      <!-- Light band: the loop and the themes diagram sit on the cream ground,
+           full-bleed, running down to the footer. -->
+      <div class="research-how">
+      <div class="research-how-inner">
       <h2 class="display-title">How we do research.</h2>
       <p style="max-width: 130ch; color: var(--muted); margin: 0 0 22px; line-height:1.65">
         We work in a loop. Measurements of real animals become models, models become predictions we can test, and
@@ -151,11 +153,13 @@
       </div>
 
       <figure class="research-themes">
-        <!-- The white-line cut of the diagram: the blackline_4K file is the same
-             artwork drawn in black, for a light ground. -->
-        <img src="assets/research/REBL_howWeDoResearch_nobg.png" loading="lazy"
+        <!-- The black-line cut of the diagram, for the light band. The nobg file
+             is the same artwork drawn in white, for a dark ground. -->
+        <img src="assets/research/REBL_howWeDoResearch_blackline_4K.png" loading="lazy"
           alt="The lab's six research themes arranged around a running cheetah: multimodal sensing, computer vision and state estimation feed measurements in; mechanical modelling, optimisation and control, and physical robots translate them back out." />
       </figure>
+      </div>
+      </div>
 
     </section>
 
@@ -315,7 +319,7 @@
             <div class="extra">
               <p>Co-supervised with Prof. Dimitrios Kanoulas.</p>
               <p>MRes: Imperial College London. <br>
-                BEng: Harbin Institute of Technology.
+                BEng: Harbin Institute of Technology, ETH Zürich.
               </p>
               <div class="links"><a href="https://shengyangzhuang.github.io/">Homepage</a>
                 <a href="https://profiles.ucl.ac.uk/105497-shengyang-zhuang">UCL profile</a>
@@ -360,6 +364,22 @@
               <div class="links">
                 <a href="https://profiles.ucl.ac.uk/107517-jiaye-huang">UCL profile</a>
                 <a href="https://www.linkedin.com/in/jiaye-huang-37a490334/">LinkedIn</a></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="person">
+          <span class="expand-icon">▾</span>
+          <div class="photo">
+            <img src="assets/people/karol.jpeg" alt="Karol Duque" />
+          </div>
+          <div class="info">
+            <h3>Karol Duque<a class="email-icon" href="mailto:karol.duque.21@ucl.ac.uk" aria-label="Email Karol Duque" title="Email Karol Duque"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /><path d="m4 7 8 7 8-7" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /></svg></a></h3>
+            <p>Research Engineer · UCL CS &amp; ARIA</p>
+            <p class="person-q">Ecological Stethoscope: multi-modal sensor system for remote wildlife health monitoring.</p>
+            <div class="extra">
+              <p>MEng: University College London.</p>
+              <div class="links"><a href="https://www.linkedin.com/in/karol-duque-311772272/">LinkedIn</a></div>
             </div>
           </div>
         </div>
@@ -422,35 +442,35 @@
       <div class="news-scroll" tabindex="0" role="region" aria-label="Latest news from REBL">
         <ol class="news">
           <li class="news-item">
-            <time datetime="2026-08">Aug 2026</time>
-            <p><strong>Website established</strong>: V1 of the REBL website is now live.</p>
+            <time datetime="2026-09">Sept. 2026</time>
+            <p><strong>Karol joined REBL as a research engineer</strong>.</p>
           </li>
           <li class="news-item">
-            <time datetime="2026-06">June 2026</time>
+            <time datetime="2026-06">Jun. 2026</time>
             <p><strong>Amir awarded ARIA Grant</strong>: Amir's project, The Ecological Stethoscope, was awarded the
               Engineering Ecosystem Resilience Seed Creators' Grant from Advanced Research + Invention Agency (ARIA).</p>
           </li>
           <li class="news-item">
-            <time datetime="2026-07">July 2026</time>
+            <time datetime="2026-07">Jul. 2026</time>
             <p><strong>Jiaye joined REBL as a PhD student</strong>.</p>
           </li>
           <li class="news-item">
-            <time datetime="2026-06">June 2026</time>
+            <time datetime="2026-06">Jun. 2026</time>
             <p><strong>Amir at ICRA 2026</strong>: Amir gave a keynote on "Brain Circulation: The Diaspora's Role in
               African Robotics", at the Robotic Systems Designed for Underrepresented Communities event as part of the
               Community Building Day at IEEE International Conference on Robotics and Automation (ICRA) 2026.</p>
           </li>
           <li class="news-item">
-            <time datetime="2026-04">April 2026</time>
+            <time datetime="2026-04">Apr. 2026</time>
             <p><strong>REBL appeared in Rae Harbird Day</strong>: Shengyang and Michael gave lectures to KS3 students as
               part of the UCL CS flagship outreach event.</p>
           </li>
           <li class="news-item">
-            <time datetime="2025-11">November 2025</time>
+            <time datetime="2025-11">Nov. 2025</time>
             <p><strong>Michael joined REBL as a PhD student</strong>.</p>
           </li>
           <li class="news-item">
-            <time datetime="2025-10">October 2025</time>
+            <time datetime="2025-10">Oct. 2025</time>
             <p><strong>Shengyang joined REBL as a PhD student</strong>.</p>
           </li>
         </ol>
@@ -684,17 +704,19 @@
           <span class="expand-icon">▾</span>
           <div class="robot-photo">
             <img src="assets/research/robotic_platforms/spaleka.png"
-              alt="Spaleka, a quadruped built on Baleka's legs with an articulated spine" loading="lazy" />
+              alt="Spaleka, built on Baleka's legs with an articulated spine and a tail" loading="lazy" />
           </div>
           <div class="ds-head">
             <h4>Spaleka</h4>
           </div>
-          <p class="ds-sub">Baleka's legs, joined by a spine.</p>
+          <p class="ds-sub">Baleka's legs, with a spine and a tail.</p>
           <div class="extra">
-            <p>A cheetah does not run on a rigid back. Spaleka is the newest platform in the line and the one
-              built to settle the spine question in hardware: Baleka's leg design carried into a quadruped, with an
-              articulated spine joining the front and rear bodies. It lets the translational-spine result be measured
-              on a real machine, against a rigid-backed baseline, rather than inferred from optimisation alone.</p>
+            <p>A cheetah does not run on a rigid back, and it does not turn with its legs alone. Spaleka is the
+              newest platform in the line, built to study the spine and the tail together in hardware: Baleka's leg
+              design, joined by an articulated spine and fitted with a tail.</p>
+            <p>The spine lets the translational-spine result be measured on a real machine, against a rigid-backed
+              baseline, rather than inferred from optimisation alone. The tail picks up where Dima left off: Spaleka
+              will be used to study how the cheetah's tail steers its hindquarters through a manoeuvre.</p>
           </div>
         </article>
       </div>
@@ -849,7 +871,7 @@
     <!-- ============= CONTACT ============= -->
     <section id="contact" class="section wrap page has-intro">
       <!-- Swap --intro-photo for the field image when it lands; nothing else changes. -->
-      <div class="page-intro has-photo" style="--intro-photo: url('assets/people/rebl-2.jpg')">
+      <div class="page-intro has-photo" style="--intro-photo: url('assets/people/rebl-2.jpg'); --intro-photo-y: 58%">
         <div class="page-intro-inner">
           <div class="kicker"><span class="dot"></span> Contact</div>
           <h2 class="display-title">Get in touch.</h2>

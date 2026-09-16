@@ -83,6 +83,17 @@
      optional; a paper without them simply renders neither. */
   const PAPERS = [
     {
+      title: "Cheetahs Combine Head Pitch Stabilisation with Predictive Yaw Tracking during High-speed Pursuit",
+      byline: "S Zhuang, K Norton, J Yu, D Kanoulas, A Patel",
+      venue: "bioRxiv",
+      year: 2026,
+      kind: "preprint",
+      tag: "Preprint",
+      // links: [
+      //   { label: "bioRxiv", href: "https://doi.org/10.64898/2026.09.03.748592" },
+      // ],
+    },
+    {
       title: "Species-specific effects of spinal stiffness on gait and actuation-cost proxy in simulated cheetah and horse galloping",
       byline: "D Schütz, S Shield, A Patel",
       venue: "Journal of Biomechanics",

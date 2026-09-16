@@ -157,6 +157,13 @@
       }
       header.classList.toggle("is-over-hero", overBand && !!hero);
       header.classList.toggle("is-over-dark", overBand && !hero);
+      // Research runs on the night ground until its cream "How we do research"
+      // band; once that band reaches the bar, the bar turns cream with it.
+      const light = $(".page.is-active .research-how");
+      header.classList.toggle(
+        "is-over-light",
+        !!light && light.getBoundingClientRect().top <= header.offsetHeight
+      );
     };
     // Inner pages start below the fixed bar; the mobile nav panel hangs off it too.
     const setHeaderHeight = () =>
