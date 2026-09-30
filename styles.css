@@ -1475,8 +1475,10 @@ button.people-subhead{
 /* Alumni cards: four per row, one notch smaller than the team cards */
 .alumni-grid{ grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px }
 .alumni-grid .person{ padding: 13px; gap: 11px }
-.alumni-grid .person .photo{ width: 112px; height: 112px; border-radius: 18px }
-.alumni-grid .person.expanded .photo{ width: 112px; height: 112px; border-radius: 18px }
+/* Starts at the size a team card's photo shrinks to when opened, and grows ~5%
+   when the alumni card opens */
+.alumni-grid .person .photo{ width: 72px; height: 72px; border-radius: 16px }
+.alumni-grid .person.expanded .photo{ width: 76px; height: 76px; border-radius: 17px }
 .alumni-grid .person h3{ font-size: 13px }
 .alumni-grid .person p{ font-size: 11.5px }
 .alumni-grid .person .links{ margin-top: 7px }
