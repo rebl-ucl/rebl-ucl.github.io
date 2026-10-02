@@ -6,3 +6,13 @@
 *.docx
 # Office lock files
 ~$*
+
+# Grey A/B variant of index.html, kept locally for comparison
+index_v2.html
+# ...and the monochrome lockups only it uses
+assets/rebl_logo_black.png
+assets/rebl_logo_white.png
+
+# The live lockup differs from the v2-only one above by case alone; keep it
+# unignored on case-insensitive checkouts (macOS, Windows) too.
+!assets/REBL_logo_black.png

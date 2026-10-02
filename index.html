@@ -9,6 +9,37 @@
 
   <link rel="icon" href="assets/rebl-logo.png" type="image/png" />
   <link rel="stylesheet" href="styles.css" />
+  <!-- Colour lockups: REBL_logo_black.png (yellow cheetah, black type) on the
+       frosted cream bar, REBL_logo.png (yellow cheetah, white type) over the hero,
+       the dark opening bands and the night ground. The bar itself keeps its
+       styles.css states; only the artwork and its crop are redefined here. -->
+  <style>
+    /* The window is the ink box, --logo-h tall. The two PNGs don't share a canvas,
+       so each carries its own scale and offsets, as fractions of its ink height,
+       and the mark lands on the same pixels in both when the bar swaps them. */
+    .logo-lock{
+      --logo-h: 56px;
+      height: var(--logo-h);
+      width: calc(var(--logo-h) * 3.08);
+    }
+    /* REBL_logo_black.png: ink 1497x486 at (75,211) on a 941px-tall canvas */
+    .logo-lock .lock-day{
+      height: calc(var(--logo-h) * 1.9362);
+      margin: calc(var(--logo-h) * -0.4342) 0 0 calc(var(--logo-h) * -0.1543);
+    }
+    /* REBL_logo.png: ink 1777x577 at (90,86) on a 793px-tall canvas. Transparent
+       ground, so no screen blend (it would wash the yellow out over the photo). */
+    .logo-lock .lock-night{
+      height: calc(var(--logo-h) * 1.3744);
+      margin: calc(var(--logo-h) * -0.1490) 0 0 calc(var(--logo-h) * -0.1560);
+      mix-blend-mode: normal;
+    }
+    .header.is-over-hero .logo-lock .lock-day{ display: none }
+    .header.is-over-hero .logo-lock .lock-night{ display: block }
+    @media (max-width: 768px){
+      .logo-lock{ --logo-h: 42px }
+    }
+  </style>
   <script defer src="publications.js"></script>
   <script defer src="script.js"></script>
 
@@ -33,10 +64,9 @@
   <header class="header is-over-hero" id="header">
     <div class="wrap header-inner">
       <a class="brand" href="#home" aria-label="REBL — Robotics-Enabled Biology Lab, home">
-        <img class="brand-glow" src="assets/newLogo_website.png" alt="" />
-        <span class="brand-ink logo-lock">
-          <img class="lock-day" src="assets/rebl_newLogo_black.png" alt="" />
-          <img class="lock-night" src="assets/newLogo_website.png" alt="" />
+        <span class="logo-lock">
+          <img class="lock-day" src="assets/REBL_logo_black.png" alt="" />
+          <img class="lock-night" src="assets/REBL_logo.png" alt="" />
         </span>
       </a>
 
@@ -383,6 +413,22 @@
             </div>
           </div>
         </div>
+
+        <div class="person">
+          <span class="expand-icon">▾</span>
+          <div class="photo">
+            <img src="assets/people/fin.jpg" alt="Fin Hurst" />
+          </div>
+          <div class="info">
+            <h3>Fin Hurst</h3>
+            <p>PhD student · UCL GEE &amp; NERC AI-INTERVENE CDT</p>
+            <p class="person-q">Computer vision for cheetah monitoring and individual re-identification.</p>
+            <div class="extra">
+              <p>Co-supervised with Prof. Sarah Durant.</p>
+              <p>MSci: University College London.</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- ---- Alumni (collapsed by default) ---- -->
@@ -449,6 +495,10 @@
       <!-- Focusable so the list can be scrolled from the keyboard, not just a wheel. -->
       <div class="news-scroll" tabindex="0" role="region" aria-label="Latest news from REBL">
         <ol class="news">
+          <li class="news-item">
+            <time datetime="2026-10">Oct. 2026</time>
+            <p><strong>Fin joined REBL as a PhD student</strong>.</p>
+          </li>
           <li class="news-item">
             <time datetime="2026-09">Sept. 2026</time>
             <p><strong>Karol joined REBL as a research engineer</strong>.</p>
@@ -644,7 +694,7 @@
           <span class="expand-icon">▾</span>
           <!-- Dima-card.jpg is the portrait original widened to square on a blurred
                copy of itself, so the frame fills the card without the crop cutting
-               the tail. Dima.JPG is the untouched photograph. -->
+               the tail. -->
           <div class="robot-photo">
             <img src="assets/research/robotic_platforms/Dima-card.jpg"
               alt="Dima, the wheeled tailed robot, its actuated tail raised above the chassis" loading="lazy" />
@@ -660,6 +710,7 @@
               3.1&nbsp;m/s without the tail and held the turn at 7.5&nbsp;m/s with it. Later revisions added a second
               tail degree of freedom to reproduce the cheetah's conical tail motion, and AeroDima replaced the heavy
               inertial tail with a light, drag-based aerodynamic one.</p>
+            <p>Developed in collaboration with the University of Cape Town.</p>
           </div>
         </article>
 
@@ -679,6 +730,7 @@
               exactly the transient manoeuvres robotics usually designs around &mdash; sprinting from standstill and
               braking hard to a stop, rather than holding a steady gait. Hopping on both legs it reaches a vertical
               agility of 1.86&nbsp;m/s; on a single leg it still exceeds the human figure of 0.89&nbsp;m/s.</p>
+            <p>Developed in collaboration with the University of Cape Town.</p>
           </div>
         </article>
 
@@ -693,26 +745,19 @@
           </div>
           <p class="ds-sub">A hybrid quadruped, and our platform for the cheetah's spine.</p>
           <div class="extra">
-            <p>Kemba splits its actuation the way the animal data suggested it should: pneumatic cylinders at the
-              knees for explosive push-off, electric motors at the hips for fine control. The split follows from a
-              decade of watching cheetahs accelerate &mdash; they do not delicately modulate foot force so much as
-              push off as hard as they can. Driven by trajectory optimisation that models the pneumatics themselves,
-              it jumps roughly 2.2 times its own leg length.</p>
-            <p>It is now the platform for our work on spine morphology. Comparing a rigid back against revolute
-              (bending) and prismatic (translational) spines under trajectory optimisation, the translational spine
-              comes out ahead: it lengthens the stride without costing stride frequency, aligns the ground reaction
-              force better and stores energy along its axis. Across a full acceleration-and-braking trajectory it is
-              the optimal morphology with about 78.8% probability, and its margin is widest in braking. Modelling
-              that prediction on Kemba, with its real actuator torque, velocity and piston-force limits in the loop,
-              the translational spine holds its advantage.</p>
+            <p>Kemba splits its actuation the way the animal data suggested: pneumatic cylinders at the knees for
+              explosive push-off, electric motors at the hips for fine control. Driven by trajectory optimisation that
+              models the pneumatics, it jumps roughly 2.2 times its own leg length. It is now our platform for spine
+              morphology: in optimisation, a translational spine beats rigid and bending backs, lengthening the stride
+              and storing energy along its axis, and it holds that advantage within Kemba's real actuator limits.</p>
+            <p>Developed in collaboration with the University of Cape Town.</p>
           </div>
         </article>
 
         <article class="ds-card robot-card">
           <span class="expand-icon">▾</span>
           <!-- spaleka-card.jpg is the studio render squared on white, with the white
-               fading out to the card's mat colour toward the edges. spaleka.jpeg is
-               the untouched render. -->
+               fading out to the card's mat colour toward the edges. -->
           <div class="robot-photo">
             <img src="assets/research/robotic_platforms/spaleka-card.jpg"
               alt="Spaleka, built on Baleka's legs with an articulated spine and a tail" loading="lazy" />
@@ -728,6 +773,7 @@
             <p>The spine lets the translational-spine result be measured on a real machine, against a rigid-backed
               baseline, rather than inferred from optimisation alone. The tail picks up where Dima left off: Spaleka
               will be used to study how the cheetah's tail steers its hindquarters through a manoeuvre.</p>
+            <p>Developed in collaboration with the University of Cape Town.</p>
           </div>
         </article>
       </div>

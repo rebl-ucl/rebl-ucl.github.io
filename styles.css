@@ -1492,7 +1492,10 @@ button.people-subhead{
 .robot-card .ds-head{ margin-top: 14px }
 .robot-card .links{ margin-bottom: 18px }
 .robot-card .extra{ margin-bottom: 0 }
-.robot-card.expanded .extra{ margin-bottom: 18px }
+/* The copy reaches ~340px in the narrowest four-column layout; the extra room
+   over the shared 400px keeps the closing UCT credit from being clipped where
+   the fallback fonts set wider. */
+.robot-card.expanded .extra{ max-height: 520px; margin-bottom: 18px }
 /* No links row on these cards, so the copy carries the bottom padding itself. */
 .robot-card:not(.expanded) .ds-sub{ margin-bottom: 18px }
 .robot-photo{
@@ -1913,7 +1916,9 @@ html[data-theme="night"] .footer{
   .header.is-over-dark .nav a{ padding: 12px 14px; color: var(--text); opacity: 0.8 }
   .nav a:hover,
   .header.is-over-hero .nav a:hover,
-  .header.is-over-dark .nav a:hover{ color: var(--text); opacity: 1 }
+  .header.is-over-dark .nav a:hover,
+  .header.is-over-hero .nav a[aria-current="page"],
+  .header.is-over-dark .nav a[aria-current="page"]{ color: var(--text); opacity: 1 }
   .nav.open{ display:flex }
   .menu-btn{ display:grid }
   html[data-theme="night"] .nav{ background: rgba(24,24,21,0.98) }
