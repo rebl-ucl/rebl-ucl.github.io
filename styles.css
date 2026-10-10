@@ -170,7 +170,7 @@ body{
    measured in script.js so inner pages always clear the fixed bar. */
 .page{ display: none }
 .page.is-active{ display: block }
-.section.page{ padding-top: calc(var(--header-h, 86px) + 44px) }
+.section.page{ padding-top: calc(var(--header-h, 86px) + clamp(48px, 8vh, 92px)) }
 .section.page.is-active{ animation: page-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both }
 @keyframes page-in{
   from{ opacity: 0; transform: translateY(10px) }
@@ -183,6 +183,25 @@ body{
    is full-bleed, so the section drops its own top padding and the band carries
    the clearance for the fixed bar instead. */
 .section.page.has-intro{ padding-top: 0 }
+
+/* Research, Team and Outputs run their heading copy straight inside
+   .section.wrap, with no .page-intro band to re-apply an inset — so .section's
+   padding shorthand above silently zeroes out the horizontal inset .wrap set,
+   and the copy sits flush with the column edge instead of indented like every
+   other page's heading. Restore the inset for just that copy here, matching
+   Projects' own text (its card grid is deliberately flush, left alone). */
+#research > .kicker,
+#team > .kicker,
+#team > h2.display-title,
+#team > p,
+#team > h3.people-subhead,
+#team > button.people-subhead,
+#outputs > .kicker,
+#outputs > h2.display-title,
+#outputs > p{
+  padding-left: var(--pad);
+  padding-right: var(--pad);
+}
 
 .page-intro{
   /* Out of the column and across the viewport. body has overflow-x:hidden, so
@@ -1951,7 +1970,6 @@ html[data-theme="night"] .footer{
   .header-inner{ padding: 10px 16px }
   .section{ padding: 56px 0 }
   .grid.cols-3, .grid.cols-2{ grid-template-columns: 1fr }
-  .section.page{ padding-top: calc(var(--header-h, 86px) + 30px) }
   .people-grid{ grid-template-columns: 1fr; }
   .alumni-grid{ grid-template-columns: 1fr; }
   .pub-featured{ grid-template-columns: 1fr; }
