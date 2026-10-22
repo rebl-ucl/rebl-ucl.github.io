@@ -58,15 +58,22 @@
   --radius-sm: 8px;
 
   --max: 1180px;
-  --pad: 20px;
+  /* The side gutter: the least room left between the content and the window
+     edge. It scales with the window, from 24px on a phone through ~40px on a
+     tablet and 50–64px on a laptop window that isn't full size, and tops out
+     at the 68px a full-size window had already. */
+  --pad: clamp(24px, 4.5vw + 6px, 68px);
 
   /* How far the content column spreads past --max: the logo/headline sit further
      left, the nav/menu the same distance right. Self-limiting — it collapses to 0
      as soon as the viewport stops having the spare gutter for it, so nothing is
      pushed off-screen on small displays. --col is the resulting column width, and
-     every band on the page (header, hero, sections, footer) shares it. */
+     every band on the page (header, hero, sections, footer) shares it. Columns
+     are border-box with --pad inside them, so --col grows with the gutter past
+     its original 20px: content on a full-size window is exactly as wide as it
+     was, and below that the gutter, not the column, sets the margin. */
   --hero-outset: clamp(0px, (100vw - var(--max)) / 2 - 48px, 96px);
-  --col: calc(var(--max) + var(--hero-outset) * 2);
+  --col: calc(var(--max) + var(--hero-outset) * 2 + (var(--pad) - 20px) * 2);
 
   --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --sans: "Helvetica Neue", Helvetica, "Segoe UI", Arial, sans-serif;
@@ -161,8 +168,12 @@ body{
 .skip-link:focus{transform: translateY(0)}
 
 /* Layout helpers */
+/* --pad is the side gutter every column keeps, so nothing runs flush to the
+   window edge once the viewport is narrower than --col. Rules that share an
+   element with .wrap (.section, .header-inner, .footer) set block padding only,
+   or the shorthand would zero this gutter out again. */
 .wrap{max-width:var(--col); margin:0 auto; padding:0 var(--pad)}
-.section{padding: 78px 0}
+.section{padding-block: 78px}
 
 /* ===== Pages =====
    The site is a set of discrete pages inside one document: the nav mounts one
@@ -183,25 +194,6 @@ body{
    is full-bleed, so the section drops its own top padding and the band carries
    the clearance for the fixed bar instead. */
 .section.page.has-intro{ padding-top: 0 }
-
-/* Research, Team and Outputs run their heading copy straight inside
-   .section.wrap, with no .page-intro band to re-apply an inset — so .section's
-   padding shorthand above silently zeroes out the horizontal inset .wrap set,
-   and the copy sits flush with the column edge instead of indented like every
-   other page's heading. Restore the inset for just that copy here, matching
-   Projects' own text (its card grid is deliberately flush, left alone). */
-#research > .kicker,
-#team > .kicker,
-#team > h2.display-title,
-#team > p,
-#team > h3.people-subhead,
-#team > button.people-subhead,
-#outputs > .kicker,
-#outputs > h2.display-title,
-#outputs > p{
-  padding-left: var(--pad);
-  padding-right: var(--pad);
-}
 
 .page-intro{
   /* Out of the column and across the viewport. body has overflow-x:hidden, so
@@ -236,15 +228,20 @@ body{
 .page-intro strong{ color: var(--on-dark) }
 
 /* --- Photo variant ---
-   Join and Contact open over a field/team photograph. Swap the image by
+   Projects, Join and Contact open over a photograph. Swap the image by
    changing --intro-photo on the band; the scrim keeps the type legible
-   whatever the picture underneath is doing. */
+   whatever the picture underneath is doing. --intro-photo-x/-y pick which part
+   of the photo stays in frame, in the photo's own coordinates. The type and
+   the heavy end of the scrim sit on the left, so a photo whose subject is on
+   the left takes --intro-photo-flip: -1 to mirror it across to the right, the
+   way the cheetah sits on the home hero. */
 .page-intro.has-photo::before{
   content: "";
   position: absolute; inset: 0;
   background-image: var(--intro-photo);
   background-size: cover;
-  background-position: center var(--intro-photo-y, 38%);
+  background-position: var(--intro-photo-x, center) var(--intro-photo-y, 38%);
+  transform: scaleX(var(--intro-photo-flip, 1));
   /* Greyscale ties the photo to the cheetah hero and stops it competing with
      the yellow/blue/pink the diagrams are drawn in. */
   filter: grayscale(1) contrast(1.05);
@@ -258,6 +255,46 @@ body{
     linear-gradient(to bottom, rgba(11,11,10,0.55), rgba(11,11,10,0) 40%, rgba(11,11,10,0.35)),
     linear-gradient(to right, rgba(11,11,10,0.97), rgba(11,11,10,0.8) 35%, rgba(11,11,10,0) 72%);
   z-index: -1;
+}
+/* --- Photo beside the type ---
+   For a photo that has to be seen rather than sit behind the copy (Join): the
+   type keeps the plain dark ground on the left, and the photo fills the right
+   of the band at full strength. It starts under the end of the copy and is
+   masked in from nothing over its first 45%, along a smoothstep curve: a
+   straight ramp has a hard start and end the eye reads as an edge, this one
+   eases in and out of both. The floor, 520px past the gutter, keeps the copy
+   over the clear end of the ramp on narrow laptops. Below 900px the copy runs the full width, so
+   the photo moves under it instead and fades in from the top. */
+.page-intro.photo-right{
+  --photo-fade:
+    rgba(0,0,0,0) 0%, rgba(0,0,0,.03) 4.5%, rgba(0,0,0,.1) 9%,
+    rgba(0,0,0,.22) 13.5%, rgba(0,0,0,.35) 18%, rgba(0,0,0,.5) 22.5%,
+    rgba(0,0,0,.65) 27%, rgba(0,0,0,.78) 31.5%, rgba(0,0,0,.9) 36%,
+    rgba(0,0,0,.97) 40.5%, #000 45%;
+}
+.page-intro.photo-right::before,
+.page-intro.photo-right::after{ left: max(40%, var(--pad) + 520px) }
+.page-intro.photo-right::before{
+  opacity: 1;
+  -webkit-mask-image: linear-gradient(to right, var(--photo-fade));
+          mask-image: linear-gradient(to right, var(--photo-fade));
+}
+/* Only the top shade is left, for the nav links that sit over the photo. */
+.page-intro.photo-right::after{
+  background: linear-gradient(to bottom, rgba(11,11,10,0.55), rgba(11,11,10,0) 30%);
+}
+@media (max-width: 900px){
+  .page-intro.photo-right{
+    --intro-photo-h: min(62vw, 420px);
+    padding-bottom: calc(var(--intro-photo-h) + 28px);
+  }
+  .page-intro.photo-right::before,
+  .page-intro.photo-right::after{ inset: auto 0 0 0; height: var(--intro-photo-h) }
+  .page-intro.photo-right::before{
+    -webkit-mask-image: linear-gradient(to bottom, var(--photo-fade));
+            mask-image: linear-gradient(to bottom, var(--photo-fade));
+  }
+  .page-intro.photo-right::after{ background: none }
 }
 
 /* --- Header over a dark band ---
@@ -332,7 +369,7 @@ body{
   align-items:center;
   justify-content:space-between;
   gap: 16px;
-  padding: 14px 0;
+  padding-block: 14px;
 }
 .header-right{ display:flex; align-items:center; gap: 8px }
 
@@ -1586,7 +1623,7 @@ html[data-theme="night"] .vacancy-dot{ box-shadow: 0 0 0 5px rgba(245,243,236,0.
 .vacancy-note a:hover{ text-decoration-color: var(--yellow) }
 
 /* ===== News =====
-   A compact feed at the foot of the Team page: date and line in one row, the
+   A compact feed at the foot of the Home page: date and line in one row, the
    whole list in a fixed-height scroller so it cannot dominate the page. */
 .news-scroll{
   /* Sized to about four entries; anything past that scrolls, so the feed can
@@ -1822,8 +1859,7 @@ html[data-theme="night"] .vacancy-dot{ box-shadow: 0 0 0 5px rgba(245,243,236,0.
    Column panel — navigation, social, address, email — over a rule, with the
    copyright line beneath it. No lockups here: the mark lives in the header. */
 .footer{
-  padding: 44px 0 40px;
-  border-top: 1px solid var(--stroke);
+  padding-block: 0 40px;
   color: var(--muted);
   font-family: var(--sans);
   font-size: 13.5px;
@@ -1842,13 +1878,17 @@ html[data-theme="night"] .footer{
   background: var(--bg);
   box-shadow: 0 0 0 100vmax var(--bg);
   clip-path: inset(0 -100vmax -100vmax);
-  border-top-color: transparent;
 }
+html[data-theme="night"] .footer-cols{ border-top-color: transparent }
+/* The top rule lives here rather than on .footer so it spans the text column,
+   not the gutter around it, and lines up with the .footer-base rule below. */
 .footer-cols{
   display: grid;
   grid-template-columns: 1.5fr 1fr 1.5fr 1.2fr;
   gap: 30px 32px;
   align-items: start;
+  padding-top: 44px;
+  border-top: 1px solid var(--stroke);
 }
 .footer-col h2{
   margin: 0 0 14px;
@@ -1904,7 +1944,6 @@ html[data-theme="night"] .footer{
 
 /* ===== Small screens ===== */
 @media (max-width: 768px){
-  .hero-copy{ padding-left: 16px; padding-right: 16px }
   /* The desktop line breaks re-wrap badly at this width — let the text flow */
   .hero-title br{ display: none }
   .hero-title{ font-size: clamp(32px, 9vw, 46px) }
@@ -1918,7 +1957,7 @@ html[data-theme="night"] .footer{
 /* Nav collapses to the menu button once the six links stop fitting */
 @media (max-width: 900px){
   .nav{
-    position:fixed; left: 16px; right: 16px; top: calc(var(--header-h, 86px) + 6px);
+    position:fixed; left: var(--pad); right: var(--pad); top: calc(var(--header-h, 86px) + 6px);
     padding: 12px;
     border-radius: 16px;
     background: rgba(244,240,229,0.98);
@@ -1964,11 +2003,8 @@ html[data-theme="night"] .footer{
   .ds-card--media.expanded .ds-media{ position: static; min-height: 0 }
   .ds-card--media.expanded .ds-media-row{ position: static }
   .ds-card--media.expanded .ds-media figure{ aspect-ratio: 16 / 9; height: auto }
-  .wrap{ padding: 0 16px }
-  /* .wrap's padding shorthand lands after .header-inner's, so the bar has to
-     restate its own vertical padding here or it collapses to the logo height. */
-  .header-inner{ padding: 10px 16px }
-  .section{ padding: 56px 0 }
+  .header-inner{ padding-block: 10px }
+  .section{ padding-block: 56px }
   .grid.cols-3, .grid.cols-2{ grid-template-columns: 1fr }
   .people-grid{ grid-template-columns: 1fr; }
   .alumni-grid{ grid-template-columns: 1fr; }

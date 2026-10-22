@@ -144,7 +144,7 @@
   let setHeaderMode = () => {};
   if (header) {
     setHeaderMode = () => {
-      const hero = $(".hero.is-active");
+      const hero = $(".page.is-active .hero");
       const band = hero || $(".page.is-active .page-intro");
       let overBand = false;
       if (band) {
@@ -186,7 +186,7 @@
   const navLinks = $$(".nav a[href^='#'], .footer-nav a[href^='#']");
   const HOME = "home";
   // Links from before People and Publications were renamed still land correctly.
-  const ALIASES = { people: "team", publications: "outputs", news: "team" };
+  const ALIASES = { people: "team", publications: "outputs", news: "home" };
   // Pages that run on the near-black ground from top to bottom. Projects, Join
   // and Contact stay on the warm ground and open on a dark .page-intro band
   // instead, which is styling, not a theme. Mirrored by the boot script in the

@@ -17,7 +17,7 @@
       title: "Rapid Turning at High-Speed: Inspirations from the Cheetah’s Tail",
       authors: "<strong>A. Patel</strong>, M. Braae",
       venue: "IROS · 2013",
-      image: "assets/publications/dima.png",
+      image: "assets/publications/dima.jpg",
       imageNote: "Suggested image: Dima turning, ideally beside a cheetah turning."
     },
     {

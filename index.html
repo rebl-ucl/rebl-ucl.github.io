@@ -48,7 +48,7 @@
        deferred router boots. The list is mirrored in script.js (DARK_PAGES). -->
   <script>
     (function () {
-      var aliases = { people: "team", publications: "outputs", news: "team" };
+      var aliases = { people: "team", publications: "outputs", news: "home" };
       var raw = (location.hash || "").slice(1);
       var page = aliases[raw] || raw;
       document.documentElement.setAttribute(
@@ -91,35 +91,85 @@
   </header>
 
   <main id="content" style="position:relative;z-index:1">
-    <!-- ============= HERO ============= -->
-    <section id="home" class="hero page">
-      <div class="hero-frame">
-        <img class="hero-bg" src="assets/cheetahBackground.PNG" alt="" aria-hidden="true" />
-        <div class="hero-scrim" aria-hidden="true"></div>
+    <!-- ============= HOME ============= -->
+    <section id="home" class="page">
+      <div class="hero">
+        <div class="hero-frame">
+          <img class="hero-bg" src="assets/cheetahBackground.jpg" alt="" aria-hidden="true" />
+          <div class="hero-scrim" aria-hidden="true"></div>
 
-        <div class="hero-copy">
-          <h1 class="hero-title">
-            Studying animals<br />
-            through the lens<br />
-            of <span class="hl">Robotics</span>
-          </h1>
+          <div class="hero-copy">
+            <h1 class="hero-title">
+              Studying animals<br />
+              through the lens<br />
+              of <span class="hl">Robotics</span>
+            </h1>
 
-          <p class="hero-desc">
-            We use robotics, AI and sensing to reveal how animals move, perceive and survive,
-            then translate those discoveries into new machines and tools for a better world.
-          </p>
+            <p class="hero-desc">
+              We use robotics, AI and sensing to reveal how animals move, perceive and survive,
+              then translate those discoveries into new machines and tools for a better world.
+            </p>
 
-          <div class="hero-btns">
-            <a class="hero-btn solid" href="#research">Explore research</a>
-            <a class="hero-btn outline" href="#team">Meet the team</a>
+            <div class="hero-btns">
+              <a class="hero-btn solid" href="#research">Explore research</a>
+              <a class="hero-btn outline" href="#team">Meet the team</a>
+            </div>
+          </div>
+
+          <div class="hero-funding" aria-label="Supported by ARIA, MathWorks and EPSRC">
+            <span class="hero-funding-label">Supported by</span>
+            <img src="assets/funding/ARIA_logo.png" alt="ARIA — Advanced Research and Invention Agency" />
+            <img src="assets/funding/mathworks_logo.png" alt="MathWorks" />
+            <img src="assets/funding/EPSRC_logo.png" alt="EPSRC — Engineering and Physical Sciences Research Council" />
           </div>
         </div>
+      </div>
 
-        <div class="hero-funding" aria-label="Supported by ARIA, MathWorks and EPSRC">
-          <span class="hero-funding-label">Supported by</span>
-          <img src="assets/funding/ARIA_logo.png" alt="ARIA — Advanced Research and Invention Agency" />
-          <img src="assets/funding/mathworks_logo.png" alt="MathWorks" />
-          <img src="assets/funding/EPSRC_logo.png" alt="EPSRC — Engineering and Physical Sciences Research Council" />
+      <!-- ---- News ---- -->
+      <div class="section wrap">
+        <div class="kicker"><span class="dot"></span> News</div>
+        <h2 class="display-title">Latest from REBL.</h2>
+
+        <!-- Focusable so the list can be scrolled from the keyboard, not just a wheel. -->
+        <div class="news-scroll" tabindex="0" role="region" aria-label="Latest news from REBL">
+          <ol class="news">
+            <li class="news-item">
+              <time datetime="2026-10">Oct. 2026</time>
+              <p><strong>Fin joined REBL as a PhD student</strong>.</p>
+            </li>
+            <li class="news-item">
+              <time datetime="2026-09">Sept. 2026</time>
+              <p><strong>Karol joined REBL as a research engineer</strong>.</p>
+            </li>
+            <li class="news-item">
+              <time datetime="2026-06">Jun. 2026</time>
+              <p><strong>Amir awarded ARIA Grant</strong>: Amir's project, The Ecological Stethoscope, was awarded the
+                Engineering Ecosystem Resilience Seed Creators' Grant from Advanced Research + Invention Agency (ARIA).</p>
+            </li>
+            <li class="news-item">
+              <time datetime="2026-07">Jul. 2026</time>
+              <p><strong>Jiaye joined REBL as a PhD student</strong>.</p>
+            </li>
+            <li class="news-item">
+              <time datetime="2026-06">Jun. 2026</time>
+              <p><strong>Amir at ICRA 2026</strong>: Amir gave a keynote on "Brain Circulation: The Diaspora's Role in
+                African Robotics", at the Robotic Systems Designed for Underrepresented Communities event as part of the
+                Community Building Day at IEEE International Conference on Robotics and Automation (ICRA) 2026.</p>
+            </li>
+            <li class="news-item">
+              <time datetime="2026-04">Apr. 2026</time>
+              <p><strong>REBL appeared in Rae Harbird Day</strong>: Shengyang and Michael gave lectures to KS3 students as
+                part of the UCL CS flagship outreach event.</p>
+            </li>
+            <li class="news-item">
+              <time datetime="2025-11">Nov. 2025</time>
+              <p><strong>Michael joined REBL as a PhD student</strong>.</p>
+            </li>
+            <li class="news-item">
+              <time datetime="2025-10">Oct. 2025</time>
+              <p><strong>Shengyang joined REBL as a PhD student</strong>.</p>
+            </li>
+          </ol>
         </div>
       </div>
     </section>
@@ -195,11 +245,12 @@
 
     <!-- ============= PROJECTS ============= -->
     <section id="projects" class="section wrap page has-intro">
-      <div class="page-intro">
+      <div class="page-intro has-photo"
+        style="--intro-photo: url('assets/banner_Projects_page.jpg'); --intro-photo-flip: -1; --intro-photo-x: 20%; --intro-photo-y: 56%">
         <div class="page-intro-inner">
           <div class="kicker"><span class="dot"></span> Projects</div>
           <h2 class="display-title">What we are working on.</h2>
-          <p style="max-width: 130ch; margin: 0; line-height:1.65">
+          <p style="max-width: 62ch; margin: 0; line-height:1.65">
             Our projects combine field observations, computational models and physical experiments to answer
             specific questions about animals and create new technologies.
           </p>
@@ -340,7 +391,7 @@
         <div class="person">
           <span class="expand-icon">▾</span>
           <div class="photo">
-            <img src="assets/people/shengyang.png" alt="Shengyang Zhuang" />
+            <img src="assets/people/shengyang.jpg" alt="Shengyang Zhuang" />
           </div>
           <div class="info">
             <h3>Shengyang Zhuang<a class="email-icon" href="mailto:shengyang.zhuang.25@ucl.ac.uk" aria-label="Email Shengyang Zhuang" title="Email Shengyang Zhuang"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /><path d="m4 7 8 7 8-7" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /></svg></a></h3>
@@ -486,53 +537,6 @@
           </div>
 
         </div>
-      </div>
-
-      <!-- ---- Recent activity ---- -->
-      <h3 class="people-subhead"><span class="dot"></span><span class="label">News</span></h3>
-
-      <h2 class="display-title">Latest from REBL.</h2>
-
-      <!-- Focusable so the list can be scrolled from the keyboard, not just a wheel. -->
-      <div class="news-scroll" tabindex="0" role="region" aria-label="Latest news from REBL">
-        <ol class="news">
-          <li class="news-item">
-            <time datetime="2026-10">Oct. 2026</time>
-            <p><strong>Fin joined REBL as a PhD student</strong>.</p>
-          </li>
-          <li class="news-item">
-            <time datetime="2026-09">Sept. 2026</time>
-            <p><strong>Karol joined REBL as a research engineer</strong>.</p>
-          </li>
-          <li class="news-item">
-            <time datetime="2026-06">Jun. 2026</time>
-            <p><strong>Amir awarded ARIA Grant</strong>: Amir's project, The Ecological Stethoscope, was awarded the
-              Engineering Ecosystem Resilience Seed Creators' Grant from Advanced Research + Invention Agency (ARIA).</p>
-          </li>
-          <li class="news-item">
-            <time datetime="2026-07">Jul. 2026</time>
-            <p><strong>Jiaye joined REBL as a PhD student</strong>.</p>
-          </li>
-          <li class="news-item">
-            <time datetime="2026-06">Jun. 2026</time>
-            <p><strong>Amir at ICRA 2026</strong>: Amir gave a keynote on "Brain Circulation: The Diaspora's Role in
-              African Robotics", at the Robotic Systems Designed for Underrepresented Communities event as part of the
-              Community Building Day at IEEE International Conference on Robotics and Automation (ICRA) 2026.</p>
-          </li>
-          <li class="news-item">
-            <time datetime="2026-04">Apr. 2026</time>
-            <p><strong>REBL appeared in Rae Harbird Day</strong>: Shengyang and Michael gave lectures to KS3 students as
-              part of the UCL CS flagship outreach event.</p>
-          </li>
-          <li class="news-item">
-            <time datetime="2025-11">Nov. 2025</time>
-            <p><strong>Michael joined REBL as a PhD student</strong>.</p>
-          </li>
-          <li class="news-item">
-            <time datetime="2025-10">Oct. 2025</time>
-            <p><strong>Shengyang joined REBL as a PhD student</strong>.</p>
-          </li>
-        </ol>
       </div>
     </section>
 
@@ -782,12 +786,12 @@
 
     <!-- ============= JOIN ============= -->
     <section id="join" class="section wrap page has-intro">
-      <!-- Swap --intro-photo for the field image when it lands; nothing else changes. -->
-      <div class="page-intro has-photo" style="--intro-photo: url('assets/people/rebl.jpg')">
+      <div class="page-intro has-photo photo-right"
+        style="--intro-photo: url('assets/banner_Join_page.jpg'); --intro-photo-x: 70%; --intro-photo-y: 42%">
         <div class="page-intro-inner">
           <div class="kicker"><span class="dot"></span> Join</div>
           <h2 class="display-title">Join the lab.</h2>
-          <p style="max-width: 120ch; margin: 0; line-height:1.65">
+          <p style="max-width: 62ch; margin: 0; line-height:1.65">
             We welcome prospective researchers, biological collaborators, conservation partners and organisations
             interested in building new tools for understanding animals.
           </p>
@@ -851,8 +855,8 @@
 
     <!-- ============= CONTACT ============= -->
     <section id="contact" class="section wrap page has-intro">
-      <!-- Swap --intro-photo for the field image when it lands; nothing else changes. -->
-      <div class="page-intro has-photo" style="--intro-photo: url('assets/people/rebl-2.jpg'); --intro-photo-y: 58%">
+      <div class="page-intro has-photo"
+        style="--intro-photo: url('assets/banner_Contact_page.jpg'); --intro-photo-flip: -1; --intro-photo-y: 40%">
         <div class="page-intro-inner">
           <div class="kicker"><span class="dot"></span> Contact</div>
           <h2 class="display-title">Get in touch.</h2>
