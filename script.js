@@ -349,12 +349,15 @@
     });
   }
   // ---------- Card expand/collapse ----------
-  // People, projects, featured papers, datasets and tools all share the
-  // behaviour: one card open at a time within its own grid.
+  // Outputs toggle independently; other sections keep one card open per grid.
   const EXPANDABLE = ".person, .pub-card, .ds-card, .project-card, .pi-block";
   $$(EXPANDABLE).forEach((card) => {
     card.addEventListener("click", (e) => {
       if (e.target.closest("a")) return;
+      if (card.closest("#outputs")) {
+        card.classList.toggle("expanded");
+        return;
+      }
       const isExpanded = card.classList.contains("expanded");
       const group = card.parentElement;
       // Siblings only, so opening the PI card does not close a team card.
@@ -364,6 +367,43 @@
       if (!isExpanded) card.classList.add("expanded");
     });
   });
+
+  // ---------- Equal collapsed heights in each Outputs grid ----------
+  // Measure closed copies so an open card never changes its neighbours' size.
+  // Recalculate for width/font changes, not when a card expands or collapses.
+  const outputGrids = $$("#outputs .pub-featured, #outputs .ds-grid");
+  const syncCollapsedHeight = (grid) => {
+    const width = grid.getBoundingClientRect().width;
+    if (!width) return; // Outputs may be hidden by the page router.
+    const measure = grid.cloneNode(true);
+    measure.setAttribute("aria-hidden", "true");
+    measure.inert = true;
+    measure.style.cssText = `position:absolute; left:-10000px; top:0; width:${width}px; visibility:hidden; pointer-events:none; --collapsed-card-height:0px`;
+    $$(".expanded", measure).forEach((card) => card.classList.remove("expanded"));
+    $$("[id]", measure).forEach((el) => el.removeAttribute("id"));
+    $$(".ds-media", measure).forEach((media) => media.remove());
+    grid.parentElement.appendChild(measure);
+    const height = Math.ceil(Math.max(...Array.from(measure.children, (card) => card.getBoundingClientRect().height)));
+    measure.remove();
+    grid.style.setProperty("--collapsed-card-height", height + "px");
+  };
+  const syncOutputHeights = () => outputGrids.forEach(syncCollapsedHeight);
+  syncOutputHeights();
+  if (window.ResizeObserver) {
+    const widths = new WeakMap();
+    const observer = new ResizeObserver((entries) => {
+      entries.forEach(({ target, contentRect }) => {
+        if (widths.get(target) === contentRect.width) return;
+        widths.set(target, contentRect.width);
+        syncCollapsedHeight(target);
+      });
+    });
+    outputGrids.forEach((grid) => observer.observe(grid));
+  } else {
+    window.addEventListener("resize", syncOutputHeights, { passive: true });
+    window.addEventListener("hashchange", syncOutputHeights);
+  }
+  if (document.fonts) document.fonts.ready.then(syncOutputHeights);
 
   // ---------- Clip previews inside expandable cards ----------
   // The markup autoplays on its own; this only stops playback while the card

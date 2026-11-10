@@ -780,7 +780,7 @@ html[data-theme="night"] .logo-lock .lock-night{ display: block }
   transition: transform 160ms ease, border-color 160ms ease;
   min-width: 0;
   /* Height of a card whose text is shorter than the thumbnail — the collapsed size. */
-  min-height: 118px;
+  min-height: max(118px, var(--collapsed-card-height, 0px));
   position: relative;
   cursor: pointer;
 }
@@ -857,10 +857,15 @@ html[data-theme="night"] .logo-lock .lock-night{ display: block }
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
+  /* Each card keeps its own height when a neighbour is toggled. */
+  align-items: start;
 }
+/* Keep enough room for the software cards' single row of resource links. */
+.software-grid{ grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)) }
 .ds-card{
   position: relative;
-  /* Cards in a row share a height; the link row sits at the bottom of each. */
+  min-height: var(--collapsed-card-height, 0px);
+  /* The link row sits at the bottom of each card. */
   display: flex;
   flex-direction: column;
   padding: 18px;
@@ -975,6 +980,7 @@ html[data-theme="night"] .logo-lock .lock-night{ display: block }
 .ds-card .extra .ds-list + p{ margin-top: 11px }
 .ds-card.expanded .extra{ margin-top: 12px }
 .ds-card .links{ margin-top: auto; padding-top: 14px; display: flex; gap: 6px; flex-wrap: wrap }
+.software-grid .links{ gap: 4px; flex-wrap: nowrap }
 
 /* Shown when the filterable list has nothing to display. */
 .pub-empty{
@@ -1451,6 +1457,7 @@ button.people-subhead{
 .person .links a:hover,
 .pi-info .links a:hover,
 .ds-card .links a:hover{ background: var(--yellow); color: var(--ink); border-color: var(--yellow-3) }
+.software-grid .links a{ padding-inline: 4px; letter-spacing: 0.02em; white-space: nowrap }
 /* Thesis card layout */
 .thesis-grid.grid{ gap: 10px; align-items: start; }
 .thesis-grid .person{ padding: 13px; }
